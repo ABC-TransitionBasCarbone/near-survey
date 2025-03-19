@@ -5,22 +5,21 @@ import {
   QUESTION_DESCRIPTION_BUTTON_ID,
 } from '@/constants/accessibility'
 import {
-  questionClickPass,
   questionClickPrevious,
-  questionClickSuivant,
 } from '@/constants/tracking/question'
 import Button from '@/design-system/inputs/Button'
 import { useClientTranslation } from '@/hooks/useClientTranslation'
 import { useMagicKey } from '@/hooks/useMagicKey'
-import { useCurrentSimulation, useForm, useRule } from '@/publicodes-state'
+import { useCurrentSimulation, useEngine, useForm, useRule } from '@/publicodes-state'
 import getValueIsOverFloorOrCeiling from '@/publicodes-state/helpers/getValueIsOverFloorOrCeiling'
 import { trackEvent } from '@/utils/matomo/trackEvent'
 import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 import type { MouseEvent } from 'react'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 import SyncIndicator from './navigation/SyncIndicator'
 import keys from '../../data/keys.json'
+import { safeEvaluateHelper } from '@/publicodes-state/helpers/safeEvaluateHelper'
 
 export default function Navigation({
   question,
@@ -34,11 +33,12 @@ export default function Navigation({
   isEmbedded?: boolean
 }) {
   const { t } = useClientTranslation()
+  const { engine } = useEngine()
 
   const { gotoPrevQuestion, gotoNextQuestion, noPrevQuestion, noNextQuestion } =
     useForm()
 
-  const { isMissing, plancher, plafond, value } = useRule(question)
+  const { isMissing, plancher, plafond } = useRule(question)
 
   const { updateCurrentSimulation } = useCurrentSimulation()
 
@@ -50,18 +50,10 @@ export default function Navigation({
 
   const isNextDisabled = isBelowFloor || isOverCeiling
 
-  // Start time of the question
-  //(we need to use question to update the start time when the question changes, but it is not exactly usefull as a dependency)
-  const startTime = useMemo(() => {
-    if (question) {
-      return Date.now()
-    }
-    return Date.now()
-  }, [question])
-
   // Fonction pour préparer les données à envoyer
   const prepareDataToSend = useCallback((JSONValue: any): { [key: string]: string } => {
-    const dataToSend: { [key: string]: string } = {};
+    if (!engine) return {};
+    const dataToSend: { [key: string]: any } = {};
     const nearId = JSONValue.simulation.nearId;
     const simulationData = {
       ...JSONValue.simulation.situation,
@@ -69,21 +61,19 @@ export default function Navigation({
     };
 
     keys.forEach((key) => {
-      let value = simulationData[key];
+      const value = simulationData[key];
 
       if (key === 'id near') {
         dataToSend['id'] = nearId;
-        return;
+      } else if (value === null) {
+        dataToSend[key] = 'je ne sais pas';
+      } else {
+        dataToSend[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? '';
       }
-      if (value === null) {
-        value = 'je ne sais pas';
-      }
-
-      dataToSend[key] = value;
     });
 
     return dataToSend;
-  }, []);
+  }, [engine]);
 
 
   function getLastSimulationFromLocalStorage() {
@@ -98,7 +88,7 @@ export default function Navigation({
 
   // Fonction pour envoyer les données au serveur
   const sendDataToServer = useCallback(async (data: { [key: string]: string }) => {
-    const voitures = localStorage.getItem('transport . voitures . km') ?? [];
+    const voitures = localStorage.getItem('transport . voiture . km') ?? [];
 
     try {
       const response = await fetch('/api/add-row', {
@@ -123,23 +113,30 @@ export default function Navigation({
   }, [onComplete]);
 
 
+  const { type, questionsOfMosaicFromParent } = useRule(question)
+
   const handleGoToNextQuestion = useCallback(
     async (e: KeyboardEvent | MouseEvent) => {
       e.preventDefault()
 
-      const endTime = Date.now()
-      const timeSpentOnQuestion = endTime - startTime
-
       if (isMissing) {
-        trackEvent(questionClickPass({ question, timeSpentOnQuestion }))
-      } else {
-        trackEvent(
-          questionClickSuivant({ question, answer: value, timeSpentOnQuestion })
-        )
-      }
-
-      if (isMissing) {
-        updateCurrentSimulation({ foldedStepToAdd: question })
+        if (type === 'mosaic') {
+          questionsOfMosaicFromParent.forEach((key) => {
+            updateCurrentSimulation({
+              situationToAdd: {
+                [key]: null
+              },
+              foldedStepToAdd: question
+            })
+          })
+        } else {
+          updateCurrentSimulation({
+            situationToAdd: {
+              [question]: null
+            },
+            foldedStepToAdd: question
+          })
+        }
       }
 
       handleMoveFocus()
@@ -155,7 +152,7 @@ export default function Navigation({
 
       gotoNextQuestion()
     },
-    [startTime, isMissing, noNextQuestion, gotoNextQuestion, question, value, updateCurrentSimulation, prepareDataToSend, sendDataToServer]
+    [isMissing, noNextQuestion, gotoNextQuestion, type, questionsOfMosaicFromParent, updateCurrentSimulation, question, prepareDataToSend, sendDataToServer]
   )
 
   useMagicKey({
