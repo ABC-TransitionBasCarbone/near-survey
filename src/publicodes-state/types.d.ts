@@ -53,9 +53,13 @@ export type ComputedResultsFootprint = {
 }
 export type ComputedResults = Record<Metric, ComputedResultsFootprint>
 
+
+interface NearSituation {
+  [key: keyof Situation]: Situation[keyof Situation] | null
+}
 export type UpdateCurrentSimulationProps = {
   situation?: Situation
-  situationToAdd?: Situation
+  situationToAdd?: NearSituation
   foldedSteps?: DottedName[]
   foldedStepToAdd?: DottedName
   actionChoices?: any
@@ -72,6 +76,7 @@ export type UpdateCurrentSimulationProps = {
 
 export type Simulation = {
   id: string
+  nearId?: string
   date: Date | string
   situation: Situation
   foldedSteps: DottedName[]

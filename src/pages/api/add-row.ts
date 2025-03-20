@@ -18,13 +18,16 @@ export default async function addRow(
 
   try {
     const simulationResults = req.body.simulationResults;
-    const voitures = req.body.voitures;
 
-    if (!simulationResults || !voitures) {
+    if (!simulationResults) {
       return res.status(400).json({ message: "Problème lors de l'appel à l'api" });
     }
 
-    // Appel à l'API de pathtech
+    await fetch(`${process.env.APP_NEAR_URL}/ngcform`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(simulationResults),
+    })
 
     return res.status(200).json({ message: SUCCESS_MESSAGES.SUCCESS });
   } catch (err) {
