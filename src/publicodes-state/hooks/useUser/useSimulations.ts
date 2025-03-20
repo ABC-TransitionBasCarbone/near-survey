@@ -54,6 +54,12 @@ export default function useSimulations({
         migrationInstructions,
       })
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const opinionWayId = urlParams.get('near-id');
+      if (opinionWayId) {
+        migratedSimulation.nearId = opinionWayId;
+      }
+
       setSimulations((prevSimulations: Simulation[]) => {
         if (id && prevSimulations.find((simulation) => simulation.id === id)) {
           return prevSimulations

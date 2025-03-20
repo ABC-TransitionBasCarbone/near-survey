@@ -76,6 +76,7 @@ export type UpdateCurrentSimulationProps = {
 
 export type Simulation = {
   id: string
+  nearId?: string
   date: Date | string
   situation: Situation
   foldedSteps: DottedName[]

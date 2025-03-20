@@ -18,7 +18,7 @@ import type { MouseEvent } from 'react'
 import { useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 import SyncIndicator from './navigation/SyncIndicator'
-import keys from '../../data/keys.json'
+import { userAnswersKeys, calculatedResultsKeys } from '../../data/keys'
 import { safeEvaluateHelper } from '@/publicodes-state/helpers/safeEvaluateHelper'
 
 export default function Navigation({
@@ -51,28 +51,31 @@ export default function Navigation({
   const isNextDisabled = isBelowFloor || isOverCeiling
 
   // Fonction pour préparer les données à envoyer
-  const prepareDataToSend = useCallback((JSONValue: any): { [key: string]: string } => {
-    if (!engine) return {};
-    const dataToSend: { [key: string]: any } = {};
-    const nearId = JSONValue.simulation.nearId;
+  const prepareDataToSend = useCallback((JSONValue: any, voitures: { [key: string]: string }[]) => {
+    const nearId = JSONValue.simulation.nearId as string;
+    if (!engine || !nearId) return {};
+    const calculatedResults: { [key: string]: any } = {};
+    const userAnswers: { [key: string]: any } = {};
     const simulationData = {
       ...JSONValue.simulation.situation,
       ...JSONValue.simulation.suggestions,
     };
 
-    keys.forEach((key) => {
+    userAnswersKeys.forEach((key) => {
       const value = simulationData[key];
 
-      if (key === 'id near') {
-        dataToSend['id'] = nearId;
-      } else if (value === null) {
-        dataToSend[key] = 'je ne sais pas';
+      if (value === null) {
+        userAnswers[key] = 'je ne sais pas';
       } else {
-        dataToSend[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? '';
+        userAnswers[key] = value;
       }
     });
 
-    return dataToSend;
+    calculatedResultsKeys.forEach((key) => {
+      calculatedResults[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? '';
+    });
+
+    return { id: nearId, calculatedResults, answers: { userAnswers, voitures } };
   }, [engine]);
 
 
@@ -87,14 +90,12 @@ export default function Navigation({
   }
 
   // Fonction pour envoyer les données au serveur
-  const sendDataToServer = useCallback(async (data: { [key: string]: string }) => {
-    const voitures = localStorage.getItem('transport . voiture . km') ?? [];
-
+  const sendDataToServer = useCallback(async (data: { id: string, calculatedResults: { [key: string]: string }, answers: { userAnswers: { [key: string]: string }, voitures: { [key: string]: string }[] } }) => {
     try {
       const response = await fetch('/api/add-row', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ simulationResults: data, voitures }),
+        body: JSON.stringify({ simulationResults: data }),
       });
 
       if (!response.ok) {
@@ -144,8 +145,13 @@ export default function Navigation({
       if (noNextQuestion) {
         const JSONValue = getLastSimulationFromLocalStorage();
         if (!JSONValue) return;
+        const localVoitures = localStorage.getItem('transport . voiture . km');
+        const voitures = localVoitures ? JSON.parse(localVoitures) : [];
 
-        const dataToSend = prepareDataToSend(JSONValue);
+        const dataToSend = prepareDataToSend(JSONValue, voitures);
+
+        if (!dataToSend.id) return;
+
         await sendDataToServer(dataToSend);
         return;
       }
