@@ -17,9 +17,9 @@ import {
   questionTypeAnswer,
 } from '@/constants/tracking/question'
 import Button from '@/design-system/inputs/Button'
-import { useRule } from '@/publicodes-state'
+import { useCurrentSimulation, useRule } from '@/publicodes-state'
 import { trackEvent } from '@/utils/matomo/trackEvent'
-import type { DottedName } from '@abc-transitionbascarbone/near-modele'
+import type { DottedName, NodeValue } from '@abc-transitionbascarbone/near-modele'
 import { useEffect, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Trans from '../translation/Trans'
@@ -62,6 +62,8 @@ export default function Question({
   // It should happen only on mount (the component remount every time the question changes)
   const prevQuestion = useRef('')
 
+  const currentSimulation = useCurrentSimulation()
+
   useEffect(() => {
     if (type !== 'number') {
       if (setTempValue) setTempValue(undefined)
@@ -76,6 +78,17 @@ export default function Question({
 
   const [isOpen, setIsOpen] = useState(showInputsLabel ? false : true)
 
+  const updateOrAddSuggestion = (
+    question: string,
+    value: NodeValue
+  ): void => {
+    const suggestionKey = `${question} . aide saisie`;
+
+    currentSimulation.suggestions[suggestionKey] = value;
+
+    currentSimulation.updateCurrentSimulation({ suggestions: currentSimulation.suggestions });
+  };
+
   return (
     <>
       <div className={twMerge('mb-6 flex flex-col items-start', className)}>
@@ -89,6 +102,7 @@ export default function Question({
               if (setTempValue) setTempValue(value as number)
             }
             setValue(value, { questionDottedName: question })
+            updateOrAddSuggestion(question, value);
           }}
         />
         {showInputsLabel ? (
@@ -186,6 +200,7 @@ export default function Question({
           question={question}
           assistance={assistance}
           setTempValue={setTempValue}
+          updateOrAddSuggestion={updateOrAddSuggestion}
         />
       ) : null}
 
