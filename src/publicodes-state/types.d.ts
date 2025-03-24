@@ -1,6 +1,7 @@
 import type {
   DottedName,
   Metrics,
+  NodeValue,
   SuggestionValue,
 } from '@abc-transitionbascarbone/near-modele'
 import type PublicodesEngine from 'publicodes'
@@ -72,7 +73,10 @@ export type UpdateCurrentSimulationProps = {
   groupToAdd?: string | null
   groupToDelete?: string | null
   savedViaEmail?: boolean
+  suggestions?: AideSaisie
 }
+
+export type AideSaisie = Record<DottedName, NodeValue>
 
 export type Simulation = {
   id: string
@@ -88,6 +92,7 @@ export type Simulation = {
   polls?: string[] | null
   groups?: string[] | null
   savedViaEmail?: boolean
+  suggestions: AideSaisie
 }
 
 export type LocalStorage = {

@@ -29,6 +29,7 @@ export function generateSimulation({
   groups,
   savedViaEmail,
   migrationInstructions,
+  suggestions = {},
 }: Partial<Simulation> & {
   migrationInstructions?: Migration
 } = {}): Simulation {
@@ -45,6 +46,7 @@ export function generateSimulation({
     polls,
     groups,
     savedViaEmail,
+    suggestions
   } as Simulation
 
   try {
