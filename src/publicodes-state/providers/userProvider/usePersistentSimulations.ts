@@ -40,11 +40,6 @@ export default function usePersistentSimulations({
       setCurrentSimulationId(localCurrentSimulationId)
     } else {
       const newSimulation = generateSimulation()
-      const urlParams = new URLSearchParams(window.location.search);
-      const opinionWayId = urlParams.get('near-id');
-      if (opinionWayId) {
-        newSimulation.nearId = opinionWayId;
-      }
 
       setSimulations([newSimulation])
       setCurrentSimulationId(newSimulation.id)
