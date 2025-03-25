@@ -52,7 +52,7 @@ export default function Navigation({
 
   // Fonction pour préparer les données à envoyer
   const prepareDataToSend = useCallback((JSONValue: any, voitures: { [key: string]: string }[]) => {
-    if (!engine) return { calculatedResults: {}, answers: { userAnswers: {}, voitures } };
+    if (!engine) return { calculatedResults: {}, answers: { userAnswers: {}, voitures }, broadcastChannel: '', broadcastId: '' };
     const calculatedResults: { [key: string]: any } = {};
     const userAnswers: { [key: string]: any } = {};
     const simulationData = {
@@ -74,7 +74,7 @@ export default function Navigation({
       calculatedResults[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? '';
     });
 
-    return { calculatedResults, answers: { userAnswers, voitures } };
+    return { calculatedResults, answers: { userAnswers, voitures }, broadcastChannel: JSONValue.simulation.broadcastChannel, broadcastId: JSONValue.simulation.broadcastId };
   }, [engine]);
 
 
@@ -89,7 +89,7 @@ export default function Navigation({
   }
 
   // Fonction pour envoyer les données au serveur
-  const sendDataToServer = useCallback(async (data: { calculatedResults: { [key: string]: string }, answers: { userAnswers: { [key: string]: string }, voitures: { [key: string]: string }[] } }) => {
+  const sendDataToServer = useCallback(async (data: { broadcastId: string, broadcastChannel: string, calculatedResults: { [key: string]: string }, answers: { userAnswers: { [key: string]: string }, voitures: { [key: string]: string }[] } }) => {
     try {
       const response = await fetch('/api/add-row', {
         method: 'POST',
@@ -140,10 +140,10 @@ export default function Navigation({
       }
 
       handleMoveFocus()
-
       if (noNextQuestion) {
         const JSONValue = getLastSimulationFromLocalStorage();
         if (!JSONValue) return;
+
         const localVoitures = localStorage.getItem('transport . voiture . km');
         const voitures = localVoitures ? JSON.parse(localVoitures) : [];
 

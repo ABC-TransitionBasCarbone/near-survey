@@ -41,6 +41,14 @@ export default function usePersistentSimulations({
     } else {
       const newSimulation = generateSimulation()
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const broadcastId = urlParams.get('broadcast-id');
+      const broadcastChannel = urlParams.get('broadcast-channel');
+      if (broadcastId && broadcastChannel) {
+        newSimulation.broadcastId = broadcastId;
+        newSimulation.broadcastChannel = broadcastChannel;
+      }
+
       setSimulations([newSimulation])
       setCurrentSimulationId(newSimulation.id)
     }

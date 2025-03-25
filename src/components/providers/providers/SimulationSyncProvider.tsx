@@ -47,6 +47,8 @@ export default function SimulationSyncProvider({
     groups,
     savedViaEmail,
     suggestions,
+    broadcastChannel,
+    broadcastId,
   } = useCurrentSimulation()
 
   const { isInitialized } = useSimulation()
@@ -111,6 +113,8 @@ export default function SimulationSyncProvider({
     groups,
     savedViaEmail,
     suggestions,
+    broadcastChannel,
+    broadcastId,
   })
 
   useEffect(() => {
@@ -132,6 +136,8 @@ export default function SimulationSyncProvider({
       polls,
       groups,
       suggestions,
+      broadcastChannel,
+      broadcastId,
     })
 
     prevSimulation.current = {
@@ -148,6 +154,8 @@ export default function SimulationSyncProvider({
       groups,
       savedViaEmail,
       suggestions,
+      broadcastChannel,
+      broadcastId,
     }
 
     // If there is no change, we do not start a save
@@ -183,6 +191,8 @@ export default function SimulationSyncProvider({
           groups,
           savedViaEmail,
           suggestions,
+          broadcastChannel,
+          broadcastId,
         },
       })
     }, SAVE_DELAY)
@@ -204,6 +214,8 @@ export default function SimulationSyncProvider({
     resetSyncTimer,
     isInitialized,
     suggestions,
+    broadcastChannel,
+    broadcastId,
   ])
 
   useEffect(() => {
