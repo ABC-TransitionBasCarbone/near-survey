@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import * as crypto from "crypto"
 
 type ResponseData = {
   message: string;
@@ -6,6 +7,15 @@ type ResponseData = {
 
 const SUCCESS_MESSAGES = {
   SUCCESS: 'The row was successfully added.',
+};
+
+export const signPayload = (payload: string) => {
+  const hash = crypto
+    .createHmac("sha256", process.env.NEAR_SECRET || "")
+    .update(payload)
+    .digest("base64");
+
+  return `sha256=${hash}`;
 };
 
 export default async function addRow(
@@ -25,7 +35,7 @@ export default async function addRow(
 
     await fetch(`${process.env.APP_NEAR_URL}/ngcform`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', signature: signPayload(JSON.stringify(simulationResults)) },
       body: JSON.stringify(simulationResults),
     })
 
