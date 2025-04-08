@@ -72,7 +72,7 @@ export default function Navigation({
     });
 
     calculatedResultsKeys.forEach((key) => {
-      calculatedResults[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? '';
+      calculatedResults[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? 0;
     });
 
     return { calculatedResults, answers: { userAnswers, voitures }, broadcastChannel: JSONValue.simulation.broadcastChannel, broadcastId: JSONValue.simulation.broadcastId };
