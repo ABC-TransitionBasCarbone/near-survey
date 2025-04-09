@@ -109,7 +109,9 @@ export default function GetResultsByEmail({
             type="submit"
             disabled={loading}
             className="mt-auto items-start"
-            data-cypress-id="fin-email-submit-button">
+            data-cypress-id="fin-email-submit-button"
+            onClick={() => { }} // TODO : en attente de l'api de pathtech
+          >
             <Trans>Envoyer</Trans>
           </Button>
 

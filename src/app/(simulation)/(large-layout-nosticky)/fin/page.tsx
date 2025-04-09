@@ -18,6 +18,7 @@ import Eau from './_components/Eau'
 import InformationBlock from './_components/InformationBlock'
 import Poll from './_components/Poll'
 import FinPageSkeleton from './skeleton'
+import GetResultsByEmail from './_components/GetResultsByEmail'
 
 const titles: Record<Metric, ReactElement> = {
   [carboneMetric]: <Trans>carbone</Trans>,
@@ -71,7 +72,7 @@ export default function FinPage() {
             <Eau />
           </div>
 
-          {/* <GetResultsByEmail /> */}
+          <GetResultsByEmail />
 
           <div id="categories-block">
             <Title tag="h2" className="text-lg lg:text-2xl">
