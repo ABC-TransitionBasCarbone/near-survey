@@ -19,14 +19,8 @@ export const periods: Record<string, string> = {
 
 export const labels: Record<string, string> = {
   work: 'Domicile-Travail',
-  holidays: 'Vacances',
-  family: 'Visite familiale',
-  school: 'Mobilité académique',
-  sport: 'Sport ou Loisir',
-  occasional: 'Sorties ponctuelles',
-  shopping: 'Courses',
-  medical: 'RDV médicaux',
-  weekends: 'Week-end',
+  holidays: 'Vacances/Week-end',
+  regular: 'Régulier',
 }
 
 export default function JourneyItem({ journey, odd, setJourneys }: Props) {
@@ -36,23 +30,20 @@ export default function JourneyItem({ journey, odd, setJourneys }: Props) {
     <tr
       className={`relative block sm:table-row ${odd ? 'bg-primary-100' : ''}`}>
       <td
-        className={`block sm:table-cell lg:border-r ${
-          odd ? 'border-white' : 'border-primary-200'
-        } px-2 text-left text-xs`}>
+        className={`block sm:table-cell lg:border-r ${odd ? 'border-white' : 'border-primary-200'
+          } px-2 text-left text-xs`}>
         {t(labels[journey.label])}
       </td>
 
       <td
-        className={`block sm:table-cell lg:border-x ${
-          odd ? 'border-white' : 'border-primary-200'
-        } p-2 text-left text-xs`}>
+        className={`block sm:table-cell lg:border-x ${odd ? 'border-white' : 'border-primary-200'
+          } p-2 text-left text-xs`}>
         {journey.distance || 0} km
       </td>
 
       <td
-        className={`block sm:table-cell lg:border-x ${
-          odd ? 'border-white' : 'border-primary-200'
-        } p-2 text-left text-xs`}>
+        className={`block sm:table-cell lg:border-x ${odd ? 'border-white' : 'border-primary-200'
+          } p-2 text-left text-xs`}>
         {journey.reccurrence} x {t(periods[journey.period])}
       </td>
 

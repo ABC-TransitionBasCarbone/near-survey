@@ -3,12 +3,11 @@ import type { Journey } from '@/types/journey'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 import { JourneysInputDesktop } from './journeysInput/JourneysInputDesktop'
 import JourneysInputMobile from './journeysInput/JourneysInputMobile'
 
 type Props = {
-  question: DottedName
+  question: string
   setTempValue?: (value: number | undefined) => void
 }
 
@@ -85,13 +84,10 @@ export default function JourneysInput({ question, setTempValue }: Props) {
   const prevTotal = useRef(total)
 
   useEffect(() => {
-    setNumPassengers(averagePassengers)
-  }, [averagePassengers, setNumPassengers])
-
-  useEffect(() => {
     if (prevTotal.current !== total) {
       if (setTempValue) setTempValue(total)
       setValue(total, { questionDottedName: question })
+      setNumPassengers(averagePassengers)
     }
     prevTotal.current = total
   }, [

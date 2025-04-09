@@ -53,6 +53,7 @@ export default function Navigation({
   // Fonction pour préparer les données à envoyer
   const prepareDataToSend = useCallback((JSONValue: any, voitures: { [key: string]: string }[]) => {
     if (!engine) return { calculatedResults: {}, answers: { userAnswers: {}, voitures }, broadcastChannel: '', broadcastId: '' };
+
     const calculatedResults: { [key: string]: any } = {};
     const userAnswers: { [key: string]: any } = {};
     const simulationData = {
@@ -71,7 +72,7 @@ export default function Navigation({
     });
 
     calculatedResultsKeys.forEach((key) => {
-      calculatedResults[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? '';
+      calculatedResults[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? 0;
     });
 
     return { calculatedResults, answers: { userAnswers, voitures }, broadcastChannel: JSONValue.simulation.broadcastChannel, broadcastId: JSONValue.simulation.broadcastId };

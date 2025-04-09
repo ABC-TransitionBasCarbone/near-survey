@@ -32,6 +32,7 @@ type Props = {
   setTempValue?: (value: number | undefined) => void
   showInputsLabel?: React.ReactNode | string
   className?: string
+  showInput?: boolean
 }
 
 export default function Question({
@@ -40,6 +41,7 @@ export default function Question({
   setTempValue,
   showInputsLabel,
   className,
+  showInput = true,
 }: Props) {
   const {
     type,
@@ -114,7 +116,7 @@ export default function Question({
             {isOpen ? <Trans>Fermer</Trans> : showInputsLabel}
           </Button>
         ) : null}
-        {isOpen && (
+        {showInput && isOpen && (
           <>
             {type === 'number' && (
               <NumberInput
