@@ -1,14 +1,12 @@
 'use client'
 
 import Trans from '@/components/translation/Trans'
-import { endClickSaveSimulation } from '@/constants/tracking/pages/end'
 import Button from '@/design-system/inputs/Button'
 import EmailInput from '@/design-system/inputs/EmailInput'
 import Card from '@/design-system/layout/Card'
 import Emoji from '@/design-system/utils/Emoji'
 import { useUser } from '@/publicodes-state'
 import { formatEmail } from '@/utils/format/formatEmail'
-import { trackEvent } from '@/utils/matomo/trackEvent'
 import { useState } from 'react'
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm as useReactHookForm } from 'react-hook-form'
@@ -28,7 +26,7 @@ export default function GetResultsByEmail({
 }: {
   className?: string
 }) {
-  const { user, updateEmail } = useUser()
+  const { user } = useUser()
   const [loading] = useState(false)
   const [error] = useState(false)
   const [success] = useState(false)
@@ -50,11 +48,13 @@ export default function GetResultsByEmail({
       return
     }
 
-    trackEvent(endClickSaveSimulation)
-
     const formattedEmail = formatEmail(data.email)
 
-    updateEmail(formattedEmail)
+    await fetch('/api/send-mail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ formattedEmail }),
+    });
   }
 
   // If we successfully saved the simulation, we display the confirmation message
@@ -110,7 +110,6 @@ export default function GetResultsByEmail({
             disabled={loading}
             className="mt-auto items-start"
             data-cypress-id="fin-email-submit-button"
-            onClick={() => { }} // TODO : en attente de l'api de pathtech
           >
             <Trans>Envoyer</Trans>
           </Button>

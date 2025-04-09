@@ -35,7 +35,7 @@ export default async function addRow(
 
     await fetch(`${process.env.APP_NEAR_URL}/ngcform`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', signature: signPayload(JSON.stringify(simulationResults)) },
+      headers: { 'Content-Type': 'application/json', "Ngc-Signature": signPayload(JSON.stringify(simulationResults)) },
       body: JSON.stringify(simulationResults),
     })
 
