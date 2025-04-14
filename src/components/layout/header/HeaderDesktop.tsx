@@ -3,11 +3,9 @@
 import ActionsIcon from '@/components/icons/ActionsIcon'
 import BilanIcon from '@/components/icons/BilanIcon'
 import PRIndicator from '@/components/layout/header/headerDesktop/PRIndicator'
-import Logo from '@/components/misc/Logo'
 import Trans from '@/components/translation/Trans'
 import {
   headerClickActions,
-  headerClickLogo,
   headerClickProfil,
   headerClickTest,
 } from '@/constants/tracking/layout'
@@ -35,10 +33,6 @@ export default function HeaderDesktop({ isSticky }: Props) {
       )}>
       <div className="absolute bottom-0 left-0 right-0 top-0 flex h-20 w-full items-center border-b bg-white shadow-sm">
         <div className="mx-auto flex h-full w-full max-w-5xl items-center justify-between gap-6">
-          <div className="flex origin-left items-center justify-center">
-            <Logo onClick={() => trackEvent(headerClickLogo)} />
-          </div>
-
           <nav className="h-full">
             <ul className="flex h-full flex-1 justify-start gap-4">
               <li>

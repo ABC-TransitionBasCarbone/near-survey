@@ -116,8 +116,7 @@ export default async function WaterFootprintLandingPage() {
               "Un homme dans un magasin réfléchissant à l'empreinte eau du tee-shirt qu'il tient"
             )}
           />
-        }
-        heroPartners={<WaterFootprintPartners />}>
+        }>
         <WhatItIsWaterFootprint />
 
         <WhatDoWeMeasureWaterFootprint />

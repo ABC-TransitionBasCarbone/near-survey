@@ -13,7 +13,7 @@ export default function LandingPage({
   heroTitle: ReactNode
   heroDescription: ReactNode
   heroIllustration: ReactNode
-  heroPartners: ReactNode
+  heroPartners?: ReactNode
   children: ReactNode
 }) {
   return (

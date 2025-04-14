@@ -33,11 +33,11 @@ export default async function Hero({
         </div>
       </div>
 
-      <div className="-mt-6 flex justify-center md:-mt-10">
+      {partners && <div className="-mt-6 flex justify-center md:-mt-10">
         <div className="relative mb-4 flex items-center justify-center gap-6 rounded-full bg-white px-12 py-4 md:mb-0 md:gap-8 md:px-24 md:py-10">
           {partners}
         </div>
-      </div>
+      </div>}
     </>
   )
 }

@@ -99,7 +99,7 @@ export default async function FAQCarbonFootprint() {
 
               <p>
                 <Trans>
-                  Le simulateur en ligne Nos Gestes Climat permet d’estimer
+                  Ce simulateur permet d’estimer
                   votre empreinte écologique, la fois votre empreinte carbone et{' '}
                   <Link href="/empreinte-eau">votre empreinte eau</Link> en
                   moins de 10 minutes.
