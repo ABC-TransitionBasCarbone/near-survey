@@ -1,4 +1,3 @@
-import Footer from '@/components/layout/Footer'
 import { getGeolocation } from '@/helpers/getGeolocation'
 import '@/locales/initClient'
 import '@/locales/initServer'
@@ -128,7 +127,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
           <MainLayoutProviders initialRegion={initialRegion}>
             {children}
-            <Footer />
+            {/* <Footer /> */}
           </MainLayoutProviders>
 
           <div id="modal" />

@@ -1,5 +1,4 @@
 import DynamicCTAButton from '@/components/cta/DynamicCTAButtons'
-import Partners from '@/components/landing-pages/Partners'
 import JSONLD from '@/components/seo/JSONLD'
 import Trans from '@/components/translation/Trans'
 import { trackingActionClickCTA } from '@/constants/tracking/actions'
@@ -115,8 +114,7 @@ export default function CarbonFootprintLandingPage() {
             src="/images/illustrations/girl-holding-earth.svg"
             alt=""
           />
-        }
-        heroPartners={<Partners />}>
+        }>
         <WhatItIsCarbon />
 
         <WhatDoWeMeasureCarbon />
