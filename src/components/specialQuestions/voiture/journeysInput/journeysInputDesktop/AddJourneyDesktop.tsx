@@ -30,8 +30,8 @@ export default function AddJourneyDesktop({ setJourneys, className }: Props) {
   useEffect(() => {
     const newPossiblePeriods: Record<string, string> = Object.keys(periods).filter((period) => {
       if (label === 'work') return true
-      if (label === 'holidays') return period === 'week'
-      if (label === 'regular') return period === 'year'
+      if (label === 'holidays') return period === 'year'
+      if (label === 'regular') return period === 'week'
     }).reduce((obj: Record<string, string>, key) => {
       obj[key] = periods[key]
       return obj

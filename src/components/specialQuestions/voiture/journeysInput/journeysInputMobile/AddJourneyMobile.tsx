@@ -8,8 +8,8 @@ import Select from '@/design-system/inputs/Select'
 import TextInputGroup from '@/design-system/inputs/TextInputGroup'
 import { useClientTranslation } from '@/hooks/useClientTranslation'
 import type { Journey } from '@/types/journey'
-import type { Dispatch, SetStateAction} from 'react';
-import { useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react';
+import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { v4 as uuid } from 'uuid'
 
@@ -24,7 +24,26 @@ export default function AddJourneyMobile({ setJourneys, className }: Props) {
   const [distance, setDistance] = useState('10')
   const [reccurrence, setReccurrence] = useState(1)
   const [period, setPeriod] = useState('week')
+  const [possiblePeriods, setPossiblePeriods] = useState(periods)
   const [passengers, setPassengers] = useState(1)
+
+  useEffect(() => {
+    const newPossiblePeriods: Record<string, string> = Object.keys(periods).filter((period) => {
+      if (label === 'work') return true
+      if (label === 'holidays') return period === 'year'
+      if (label === 'regular') return period === 'week'
+    }).reduce((obj: Record<string, string>, key) => {
+      obj[key] = periods[key]
+      return obj
+    }, {})
+
+    setPossiblePeriods(newPossiblePeriods)
+
+    if (Object.keys(newPossiblePeriods).length === 1) {
+      setPeriod(Object.keys(newPossiblePeriods)[0])
+    }
+  }, [label])
+
 
   return (
     <tr
@@ -77,7 +96,7 @@ export default function AddJourneyMobile({ setJourneys, className }: Props) {
             name="period"
             label={t('Période')}
             onChange={(e) => setPeriod(e.target.value)}>
-            {Object.entries(periods).map(([key, period], i) => {
+            {Object.entries(possiblePeriods).map(([key, period], i) => {
               return (
                 <option key={i} value={key}>
                   {t(period)}
