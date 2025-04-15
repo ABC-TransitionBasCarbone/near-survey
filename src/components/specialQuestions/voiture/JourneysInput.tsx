@@ -23,7 +23,7 @@ function roundFloat(value: number, precision: number = 10): number {
 }
 
 export default function JourneysInput({ question, setTempValue }: Props) {
-  const { setValue } = useRule(question)
+  const { value, setValue } = useRule(question)
 
   const { setValue: setNumPassengers } = useRule(
     'transport . voiture . voyageurs'
@@ -84,10 +84,14 @@ export default function JourneysInput({ question, setTempValue }: Props) {
   const prevTotal = useRef(total)
 
   useEffect(() => {
+    setNumPassengers(averagePassengers)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
+
+  useEffect(() => {
     if (prevTotal.current !== total) {
       if (setTempValue) setTempValue(total)
       setValue(total, { questionDottedName: question })
-      setNumPassengers(averagePassengers)
     }
     prevTotal.current = total
   }, [
