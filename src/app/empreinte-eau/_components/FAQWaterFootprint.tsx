@@ -1,5 +1,4 @@
 import FAQ from '@/components/landing-pages/FAQ'
-import Link from '@/components/Link'
 import Trans from '@/components/translation/Trans'
 import { getServerTranslation } from '@/helpers/getServerTranslation'
 
