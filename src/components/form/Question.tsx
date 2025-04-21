@@ -95,7 +95,7 @@ export default function Question({
     <>
       <div className={twMerge('mb-6 flex flex-col items-start', className)}>
         <Category question={question} />
-        <Label question={question} label={label} description={description} />
+        <Label question={question} label={label} description={description} InitialOpen={question.match('services sociétaux . su')} />
 
         <Suggestions
           question={question}
