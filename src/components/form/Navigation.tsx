@@ -50,8 +50,8 @@ export default function Navigation({
   })
 
   const isNextDisabled = useMemo(() => {
-    return (isBelowFloor || isOverCeiling) || (tempValue !== undefined && plancher !== undefined && tempValue < plancher) || value === undefined;
-  }, [isBelowFloor, isOverCeiling, plancher, tempValue, value]);
+    return (isBelowFloor || isOverCeiling) || (question.match('services sociétaux . su') && (tempValue !== undefined || value === undefined));
+  }, [isBelowFloor, isOverCeiling, question, tempValue, value]);
 
   // Fonction pour préparer les données à envoyer
   const prepareDataToSend = useCallback((JSONValue: any, voitures: { [key: string]: string }[]) => {
