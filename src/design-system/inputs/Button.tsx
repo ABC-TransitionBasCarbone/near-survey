@@ -54,12 +54,13 @@ export default function Button({
       onClick={
         disabled
           ? (e) => {
-              e.preventDefault
-            }
+            e.preventDefault
+          }
           : onClick
       }
       type={type}
       aria-disabled={disabled}
+      disabled={disabled}
       title={title}
       form={form}
       id={id}

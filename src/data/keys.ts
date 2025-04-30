@@ -68,8 +68,10 @@ export const calculatedResultsKeys = [
     "divers . textile",
     "services sociétaux",
     "services publics",
-    "services marchands"
+    "services marchands",
+    "services sociétaux . su"
 ]
+
 
 export const userAnswersKeys = [
     "transport . voiture . utilisateur",
@@ -250,4 +252,12 @@ export const userAnswersKeys = [
     "divers . textile . gros article . nombre",
     "divers . produits consommables . consommation",
     "divers . autres produits . niveau de dépenses",
+    "services sociétaux . connaissance su",
+    "services sociétaux . su . choix",
+    "services sociétaux . su . calcul su . question 1",
+    "services sociétaux . su . calcul su . question 2",
+    "services sociétaux . su . calcul su . question 3",
+    "services sociétaux . su . calcul su . question 4",
+    "services sociétaux . su . calcul su . question 5",
+    "services sociétaux . su . calcul su . question 6",
 ]

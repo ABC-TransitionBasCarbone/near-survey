@@ -15,7 +15,7 @@ import getValueIsOverFloorOrCeiling from '@/publicodes-state/helpers/getValueIsO
 import { trackEvent } from '@/utils/matomo/trackEvent'
 import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 import type { MouseEvent } from 'react'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import SyncIndicator from './navigation/SyncIndicator'
 import { userAnswersKeys, calculatedResultsKeys } from '../../data/keys'
@@ -38,7 +38,8 @@ export default function Navigation({
   const { gotoPrevQuestion, gotoNextQuestion, noPrevQuestion, noNextQuestion } =
     useForm()
 
-  const { isMissing, plancher, plafond } = useRule(question)
+  const { isMissing, plancher, plafond, value } = useRule(question)
+
 
   const { updateCurrentSimulation } = useCurrentSimulation()
 
@@ -48,7 +49,9 @@ export default function Navigation({
     plancher,
   })
 
-  const isNextDisabled = isBelowFloor || isOverCeiling
+  const isNextDisabled = useMemo(() => {
+    return (isBelowFloor || isOverCeiling) || (question.match('services sociétaux . su') && (value === undefined));
+  }, [isBelowFloor, isOverCeiling, question, value]);
 
   // Fonction pour préparer les données à envoyer
   const prepareDataToSend = useCallback((JSONValue: any, voitures: { [key: string]: string }[]) => {
@@ -222,7 +225,7 @@ export default function Navigation({
           onClick={handleGoToNextQuestion}>
           {noNextQuestion
             ? t('Terminer')
-            : isMissing
+            : isMissing && !isNextDisabled
               ? t('Passer la question') + ' →'
               : t('Suivant') + ' →'}
         </Button>

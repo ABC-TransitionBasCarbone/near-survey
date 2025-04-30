@@ -28,6 +28,7 @@ type Props = {
   size?: QuestionSize
   className?: string
   titleClassName?: string
+  initialOpen?: boolean
 }
 
 const sizeClassNames = {
@@ -42,8 +43,9 @@ export default function Label({
   size = 'md',
   className,
   titleClassName,
+  initialOpen,
 }: Props) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(!!initialOpen)
 
   const { t } = useClientTranslation()
 
