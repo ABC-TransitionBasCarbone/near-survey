@@ -33,6 +33,7 @@ export const mapNewSimulationToOld = (
   suggestions: {},
   broadcastId: '',
   broadcastChannel: '',
+  neighborhoodId: '',
 })
 
 export const mapOldSimulationToNew = ({

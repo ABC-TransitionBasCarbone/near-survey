@@ -44,9 +44,11 @@ export default function usePersistentSimulations({
       const urlParams = new URLSearchParams(window.location.search);
       const broadcastId = urlParams.get('broadcast-id');
       const broadcastChannel = urlParams.get('broadcast-channel');
-      if (broadcastId && broadcastChannel) {
+      const neighborhoodId = urlParams.get('neighborhood-id');
+      if (broadcastId && broadcastChannel && neighborhoodId) {
         newSimulation.broadcastId = broadcastId;
         newSimulation.broadcastChannel = broadcastChannel;
+        newSimulation.neighborhoodId = neighborhoodId;
       }
 
       setSimulations([newSimulation])

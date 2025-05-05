@@ -94,6 +94,7 @@ export type Simulation = {
   savedViaEmail?: boolean
   suggestions: AideSaisie
   broadcastChannel: string
+  neighborhoodId: string
   broadcastId: string
 }
 

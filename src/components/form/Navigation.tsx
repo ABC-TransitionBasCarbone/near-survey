@@ -55,7 +55,7 @@ export default function Navigation({
 
   // Fonction pour préparer les données à envoyer
   const prepareDataToSend = useCallback((JSONValue: any, voitures: { [key: string]: string }[]) => {
-    if (!engine) return { calculatedResults: {}, answers: { userAnswers: {}, voitures }, broadcastChannel: '', broadcastId: '' };
+    if (!engine) return { calculatedResults: {}, answers: { userAnswers: {}, voitures }, broadcastChannel: '', broadcastId: '', neighborhoodId: '' };
 
     const calculatedResults: { [key: string]: any } = {};
     const userAnswers: { [key: string]: any } = {};
@@ -78,7 +78,7 @@ export default function Navigation({
       calculatedResults[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? 0;
     });
 
-    return { calculatedResults, answers: { userAnswers, voitures }, broadcastChannel: JSONValue.simulation.broadcastChannel, broadcastId: JSONValue.simulation.broadcastId };
+    return { calculatedResults, answers: { userAnswers, voitures }, broadcastChannel: JSONValue.simulation.broadcastChannel, broadcastId: JSONValue.simulation.broadcastId, neighborhoodId: JSONValue.simulation.neighborhoodId };
   }, [engine]);
 
 
@@ -93,7 +93,7 @@ export default function Navigation({
   }
 
   // Fonction pour envoyer les données au serveur
-  const sendDataToServer = useCallback(async (data: { broadcastId: string, broadcastChannel: string, calculatedResults: { [key: string]: string }, answers: { userAnswers: { [key: string]: string }, voitures: { [key: string]: string }[] } }) => {
+  const sendDataToServer = useCallback(async (data: { broadcastId: string, broadcastChannel: string, neighborhoodId: string, calculatedResults: { [key: string]: string }, answers: { userAnswers: { [key: string]: string }, voitures: { [key: string]: string }[] } }) => {
     try {
       const response = await fetch('/api/add-row', {
         method: 'POST',
