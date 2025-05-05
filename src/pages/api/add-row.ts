@@ -33,7 +33,6 @@ export default async function addRow(
       return res.status(400).json({ message: "Problème lors de l'appel à l'api" });
     }
 
-    console.log('Simulation Results:', simulationResults);
     await fetch(`${process.env.APP_NEAR_URL}/ngcform`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', "Ngc-Signature": signPayload(JSON.stringify(simulationResults)) },
