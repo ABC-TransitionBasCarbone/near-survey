@@ -48,6 +48,7 @@ export default function SimulationSyncProvider({
     savedViaEmail,
     suggestions,
     broadcastChannel,
+    neighborhoodId,
     broadcastId,
   } = useCurrentSimulation()
 
@@ -114,6 +115,7 @@ export default function SimulationSyncProvider({
     savedViaEmail,
     suggestions,
     broadcastChannel,
+    neighborhoodId,
     broadcastId,
   })
 
@@ -137,6 +139,7 @@ export default function SimulationSyncProvider({
       groups,
       suggestions,
       broadcastChannel,
+      neighborhoodId,
       broadcastId,
     })
 
@@ -155,6 +158,7 @@ export default function SimulationSyncProvider({
       savedViaEmail,
       suggestions,
       broadcastChannel,
+      neighborhoodId,
       broadcastId,
     }
 
@@ -192,6 +196,7 @@ export default function SimulationSyncProvider({
           savedViaEmail,
           suggestions,
           broadcastChannel,
+          neighborhoodId,
           broadcastId,
         },
       })
@@ -215,6 +220,7 @@ export default function SimulationSyncProvider({
     isInitialized,
     suggestions,
     broadcastChannel,
+    neighborhoodId,
     broadcastId,
   ])
 
