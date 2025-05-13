@@ -50,7 +50,7 @@ export default function Navigation({
   })
 
   const isNextDisabled = useMemo(() => {
-    return (isBelowFloor || isOverCeiling) || (question.match('services sociétaux . su') && (value === undefined));
+    return (isBelowFloor || isOverCeiling) || ((question.match("transport . voiture . utilisateur") || question.match('services sociétaux . su')) && (value === undefined));
   }, [isBelowFloor, isOverCeiling, question, value]);
 
   // Fonction pour préparer les données à envoyer

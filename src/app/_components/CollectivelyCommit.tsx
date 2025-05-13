@@ -12,7 +12,7 @@ export default async function CollectivelyCommit() {
           <div className="flex flex-col items-center gap-6">
             <p className="text-center text-sm md:text-lg">
               <Trans>
-                Les questions auxquelles vous allez répondre vous permettrons d’estimer et comprendre votre empreinte carbone (et eau également). Vous pourrez ensuite découvrir les pistes d’actions pour la réduire. Mais cette réduction ne peut être uniquement le fruit de choix personnels. C’est pourquoi avec le projet NEAR, nous vous proposons d’œuvrer à une échelle plus large, celle de votre quartier. Ce dernier a une influence directe sur nos modes de vies, c’est pourquoi il doit être transformé pour favoriser les modes de vies sobres en carbone.
+                Les questions auxquelles vous allez répondre vous permettrons d’estimer et comprendre votre empreinte carbone (et eau également). Vous pourrez ensuite découvrir les pistes d’actions pour la réduire. Mais cette réduction ne peut être uniquement le fruit de choix personnels. C’est pourquoi avec le projet NEAR, nous vous proposons d’œuvrer à une échelle plus large, celle de votre quartier. Ce dernier a une influence directe sur nos modes de vies, c'est pourquoi il est le bon lieu pour développer des aménagements collectifs qui améliorent le cadre de vie tout en facilitant des modes de vie sobres en carbone.
               </Trans>
             </p>
             <p className="text-center text-sm font-bold text-secondary-700 md:text-lg">
@@ -36,7 +36,7 @@ export default async function CollectivelyCommit() {
             </p>
             <p>
               <Trans>
-                NEAR est porté par les équipes de la Ville de Paris, du Réseau des Quartiers en Transition, de l’Association pour la transition Bas Carbone et par la Coopérative Carbone Paris & Métropole du Grand Paris.
+                NEAR est porté par les équipes de la Ville de Paris, du Réseau des Quartiers en Transitions, de l’Association pour la transition Bas Carbone et par la Coopérative Carbone Paris & Métropole du Grand Paris.
               </Trans>
             </p>
           </div >

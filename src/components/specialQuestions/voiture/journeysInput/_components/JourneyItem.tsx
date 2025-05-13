@@ -20,7 +20,7 @@ export const periods: Record<string, string> = {
 export const labels: Record<string, string> = {
   work: 'Domicile-Travail',
   holidays: 'Vacances/Week-end',
-  regular: 'Régulier',
+  regular: 'Personnel courant',
 }
 
 export default function JourneyItem({ journey, odd, setJourneys }: Props) {
