@@ -37,18 +37,15 @@ export default async function Homepage() {
           <div className="flex flex-col">
           </div>
         }
-        heroTitle={<Trans>Connaissez-vous votre empreinte écologique ?</Trans>}
+        heroTitle={<Trans>Explorer votre empreinte écologique ?</Trans>}
         heroDescription={
           <div className="flex flex-col items-center gap-6 md:gap-10 text-center">
             <p className="order-2 mb-0 text-lg md:order-1 md:text-2xl">
               <Trans>
-                Calculez votre{' '}
+                10 minutes pour découvrir votre{' '}
                 <strong className="text-primary-700">empreinte carbone</strong>{' '}
                 et votre{' '}
-                <strong className="text-primary-700">empreinte eau</strong> en{' '}
-                <strong className="text-secondary-700">
-                  seulement 10 minutes
-                </strong>
+                <strong className="text-primary-700">empreinte eau</strong>
                 .
               </Trans>
             </p>
