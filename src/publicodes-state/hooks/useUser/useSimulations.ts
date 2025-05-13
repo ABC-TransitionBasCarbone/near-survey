@@ -55,9 +55,9 @@ export default function useSimulations({
       })
 
       const urlParams = new URLSearchParams(window.location.search);
-      const broadcastId = urlParams.get('broadcast-id');
-      const broadcastChannel = urlParams.get('broadcast-channel');
-      const neighborhoodId = urlParams.get('neighborhood-id');
+      const broadcastId = urlParams.get('broadcast_id');
+      const broadcastChannel = urlParams.get('broadcast_channel');
+      const neighborhoodId = urlParams.get('neighborhood');
       if (broadcastId && broadcastChannel && neighborhoodId) {
         migratedSimulation.broadcastId = broadcastId;
         migratedSimulation.broadcastChannel = broadcastChannel;
