@@ -42,9 +42,9 @@ export default function usePersistentSimulations({
       const newSimulation = generateSimulation()
 
       const urlParams = new URLSearchParams(window.location.search);
-      const broadcastId = urlParams.get('broadcast-id');
-      const broadcastChannel = urlParams.get('broadcast-channel');
-      const neighborhoodId = urlParams.get('neighborhood-id');
+      const broadcastId = urlParams.get('broadcast_id');
+      const broadcastChannel = urlParams.get('broadcast_channel');
+      const neighborhoodId = urlParams.get('neighborhood');
       if (broadcastId && broadcastChannel && neighborhoodId) {
         newSimulation.broadcastId = broadcastId;
         newSimulation.broadcastChannel = broadcastChannel;
