@@ -78,7 +78,7 @@ export default function Navigation({
       calculatedResults[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? 0;
     });
 
-    return { calculatedResults, answers: { userAnswers, voitures }, broadcastChannel: idValue.broadcastChannel, broadcastId: idValue.broadcastId, neighborhoodId: idValue.neighborhoodId };
+    return { calculatedResults, answers: { userAnswers, voitures }, broadcastChannel: idValue.broadcastChannel, broadcastId: idValue.broadcastId, neighborhoodId: idValue.neighborhoodId, id: JSONValue.simulation.id };
   }, [engine]);
 
 

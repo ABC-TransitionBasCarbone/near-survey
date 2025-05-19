@@ -50,10 +50,16 @@ export default function GetResultsByEmail({
 
     const formattedEmail = formatEmail(data.email)
 
+    const localStorageValue = localStorage.getItem('near::v1');
+    if (!localStorageValue) return null;
+
+    const JSONValue: any = JSON.parse(localStorageValue);
+    const lastSimu = JSONValue.simulations.at(-1); // Dernière simulation
+
     await fetch('/api/send-mail', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ formattedEmail }),
+      body: JSON.stringify({ formattedEmail, id: lastSimu.id }),
     });
   }
 
