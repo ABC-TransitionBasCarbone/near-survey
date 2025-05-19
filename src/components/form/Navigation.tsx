@@ -54,7 +54,7 @@ export default function Navigation({
   }, [isBelowFloor, isOverCeiling, question, value]);
 
   // Fonction pour préparer les données à envoyer
-  const prepareDataToSend = useCallback((JSONValue: any, voitures: { [key: string]: string }[]) => {
+  const prepareDataToSend = useCallback((JSONValue: any, voitures: { [key: string]: string }[], idValue: any) => {
     if (!engine) return { calculatedResults: {}, answers: { userAnswers: {}, voitures }, broadcastChannel: '', broadcastId: '', neighborhoodId: '' };
 
     const calculatedResults: { [key: string]: any } = {};
@@ -78,7 +78,7 @@ export default function Navigation({
       calculatedResults[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? 0;
     });
 
-    return { calculatedResults, answers: { userAnswers, voitures }, broadcastChannel: JSONValue.simulation.broadcastChannel, broadcastId: JSONValue.simulation.broadcastId, neighborhoodId: JSONValue.simulation.neighborhoodId };
+    return { calculatedResults, answers: { userAnswers, voitures }, broadcastChannel: idValue.broadcastChannel, broadcastId: idValue.broadcastId, neighborhoodId: idValue.neighborhoodId, id: JSONValue.simulation.id };
   }, [engine]);
 
 
@@ -148,10 +148,12 @@ export default function Navigation({
         const JSONValue = getLastSimulationFromLocalStorage();
         if (!JSONValue) return;
 
+        const idValue = JSON.parse(localStorage.getItem('near-id::v1') || '{}');
+
         const localVoitures = localStorage.getItem('transport . voiture . km');
         const voitures = localVoitures ? JSON.parse(localVoitures) : [];
 
-        const dataToSend = prepareDataToSend(JSONValue, voitures);
+        const dataToSend = prepareDataToSend(JSONValue, voitures, idValue);
 
         await sendDataToServer(dataToSend);
         return;

@@ -93,9 +93,6 @@ export type Simulation = {
   groups?: string[] | null
   savedViaEmail?: boolean
   suggestions: AideSaisie
-  broadcastChannel: string
-  neighborhoodId: string
-  broadcastId: string
 }
 
 export type LocalStorage = {
