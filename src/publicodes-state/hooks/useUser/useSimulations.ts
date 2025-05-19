@@ -54,17 +54,6 @@ export default function useSimulations({
         migrationInstructions,
       })
 
-      const urlParams = new URLSearchParams(window.location.search);
-      const broadcastId = urlParams.get('broadcast_id');
-      const broadcastChannel = urlParams.get('broadcast_channel');
-      const neighborhoodId = urlParams.get('neighborhood');
-      if (broadcastId && broadcastChannel && neighborhoodId) {
-        migratedSimulation.broadcastId = broadcastId;
-        migratedSimulation.broadcastChannel = broadcastChannel;
-        migratedSimulation.neighborhoodId = neighborhoodId;
-      }
-
-
       setSimulations((prevSimulations: Simulation[]) => {
         if (id && prevSimulations.find((simulation) => simulation.id === id)) {
           return prevSimulations
