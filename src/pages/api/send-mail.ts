@@ -17,13 +17,13 @@ export default async function sendMail(
   }
 
   try {
-    const formattedEmail = req.body.formattedEmail;
+    const { formattedEmail, id } = req.body;
 
-    if (!formattedEmail) {
+    if (!formattedEmail || !id) {
       return res.status(400).json({ message: "Problème lors de l'appel à l'api" });
     }
 
-    const body = JSON.stringify({ email: formattedEmail })
+    const body = JSON.stringify({ email: formattedEmail, id })
     await fetch(`${process.env.APP_NEAR_URL}/ngcform/emails`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', "Ngc-Signature": signPayload(body) },
