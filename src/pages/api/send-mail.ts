@@ -24,11 +24,15 @@ export default async function sendMail(
     }
 
     const body = JSON.stringify({ email: formattedEmail, id })
-    await fetch(`${process.env.APP_NEAR_URL}/ngcform/emails`, {
+    const emailResponse = await fetch(`${process.env.APP_NEAR_URL}/ngcform/emails`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', "Ngc-Signature": signPayload(body) },
         body,
     })
+
+    if (emailResponse.status !== 200) {
+      return res.status(500).json({ message: "Problème lors de l'appel à l'api" });
+    }
 
     return res.status(200).json({ message: SUCCESS_MESSAGES.SUCCESS });
   } catch (err) {

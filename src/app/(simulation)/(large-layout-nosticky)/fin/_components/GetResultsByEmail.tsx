@@ -27,9 +27,9 @@ export default function GetResultsByEmail({
   className?: string
 }) {
   const { user } = useUser()
-  const [loading] = useState(false)
-  const [error] = useState(false)
-  const [success] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState(false)
 
   const {
     register,
@@ -43,6 +43,9 @@ export default function GetResultsByEmail({
   })
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setLoading(true)
+    setError("")
+
     // If the mutation is pending, we do nothing
     if (loading) {
       return
@@ -56,11 +59,18 @@ export default function GetResultsByEmail({
     const JSONValue: any = JSON.parse(localStorageValue);
     const lastSimu = JSONValue.simulations.at(-1); // Dernière simulation
 
-    await fetch('/api/send-mail', {
+    const emailResponse = await fetch('/api/send-mail', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ formattedEmail, id: lastSimu.id }),
     });
+
+    if (emailResponse.status !== 200) {
+      setError("Une erreur est survenue lors de l'envoi de l'email.")
+      setLoading(false)
+      return
+    }
+    setSuccess(true)
   }
 
   // If we successfully saved the simulation, we display the confirmation message
