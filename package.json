@@ -34,7 +34,7 @@
     "ts:prune": "ts-prune | grep -v generateMetadata"
   },
   "dependencies": {
-    "@abc-transitionbascarbone/near-modele": "1.0.3",
+    "@abc-transitionbascarbone/near-modele": "1.0.4",
     "@babel/runtime": "^7.23.1",
     "@incubateur-ademe/legal-pages-react": "^0.2.0",
     "@mdx-js/loader": "^3.0.0",
