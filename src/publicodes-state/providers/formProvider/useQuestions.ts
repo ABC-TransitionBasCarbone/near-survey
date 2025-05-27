@@ -1,4 +1,4 @@
-import type { DottedName } from '@incubateur-ademe/nosgestesclimat'
+import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 import type { EvaluatedNode, PublicodesExpression } from 'publicodes'
 import { useMemo } from 'react'
 import getIsMissing from '../../helpers/getIsMissing'
@@ -106,10 +106,11 @@ export default function useQuestions({
       // all that are in folded steps
       .filter((question) => foldedSteps.indexOf(question) === -1)
       // and all that are not missing
-      .filter((question) =>
-        Object.keys(missingVariables).find((missingVariable) =>
-          missingVariable.includes(question)
+      .filter((question) => {
+        return Object.keys(missingVariables).find((missingVariable) =>
+          missingVariable.includes(question) && !Number.isNaN(missingVariables[missingVariable])
         )
+      }
       )
 
     // then we sort them by category, subcategory and missing variables

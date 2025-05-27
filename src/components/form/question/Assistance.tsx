@@ -6,7 +6,7 @@ import {
   getBgCategoryColor,
   getBorderCategoryColor,
 } from '@/helpers/getCategoryColorClass'
-import type { DottedName } from '@incubateur-ademe/nosgestesclimat'
+import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 import { useEffect, useRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -14,12 +14,14 @@ type Props = {
   question: DottedName
   assistance: DottedName
   setTempValue?: (value: number | undefined) => void
+  updateOrAddSuggestion: (question: string, value: any) => void
 }
 
 export default function Assistance({
   question,
   assistance,
   setTempValue,
+  updateOrAddSuggestion,
 }: Props) {
   const { setValue: setValueOfQuestion, value: valueOfQuestion } =
     useRule(question)
@@ -60,6 +62,15 @@ export default function Assistance({
     question,
   ])
 
+  const handleSetValueOfAssistance = (value: number | undefined) => {
+    setValueOfAssistance(value); // Mettre à jour la valeur de l'assistance
+    if (setTempValue) {
+      setTempValue(value); // Mettre à jour la valeur temporaire
+    }
+
+    updateOrAddSuggestion(question, value);
+  }
+
   return (
     <div
       className={twMerge(
@@ -79,7 +90,7 @@ export default function Assistance({
         <NumberInput
           unit={unit ? unit.split('/')[0] : ''}
           value={numericValueOfAssistance}
-          setValue={setValueOfAssistance}
+          setValue={handleSetValueOfAssistance}
           isMissing={numericValueOfAssistance ? false : true}
         />
       )}

@@ -2,12 +2,10 @@
 
 import Trans from '@/components/translation/Trans'
 import { carboneMetric, eauMetric } from '@/constants/metric'
-import Badge from '@/design-system/layout/Badge'
 import { useClientTranslation } from '@/hooks/useClientTranslation'
 import { useCurrentMetric } from '@/hooks/useCurrentMetric'
 import type { Metric } from '@/publicodes-state/types'
 import { twMerge } from 'tailwind-merge'
-import HeadingButtons from './heading/HeadingButtons'
 
 const tabSelectedClasses =
   'border-x-primary-50 border-b-transparent border-t-primary-50 bg-gray-100'
@@ -38,7 +36,6 @@ type Props = {
 }
 export default function TabNavigation({
   isSticky,
-  isStatic,
   shouldShowWater,
 }: Props) {
   const { t } = useClientTranslation()
@@ -88,16 +85,9 @@ export default function TabNavigation({
               )}>
               <Trans>eau</Trans>
             </strong>
-            <Badge
-              size="xs"
-              color="secondary"
-              className="absolute bottom-full left-full -translate-x-6 translate-y-3 ">
-              BETA
-            </Badge>
           </button>
         )}
       </div>
-      {!isStatic && <HeadingButtons />}
     </div>
   )
 }

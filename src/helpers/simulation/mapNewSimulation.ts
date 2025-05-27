@@ -30,6 +30,7 @@ export const mapNewSimulationToOld = (
       {}
     ),
   polls: simulation.polls?.map(({ slug }) => slug),
+  suggestions: {},
 })
 
 export const mapOldSimulationToNew = ({

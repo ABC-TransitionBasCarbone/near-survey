@@ -15,7 +15,7 @@ import Markdown from '@/design-system/utils/Markdown'
 import { useClientTranslation } from '@/hooks/useClientTranslation'
 import type { QuestionSize } from '@/types/values'
 import { trackEvent } from '@/utils/matomo/trackEvent'
-import type { DottedName } from '@incubateur-ademe/nosgestesclimat'
+import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
@@ -28,6 +28,7 @@ type Props = {
   size?: QuestionSize
   className?: string
   titleClassName?: string
+  initialOpen?: boolean
 }
 
 const sizeClassNames = {
@@ -42,8 +43,9 @@ export default function Label({
   size = 'md',
   className,
   titleClassName,
+  initialOpen,
 }: Props) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(!!initialOpen)
 
   const { t } = useClientTranslation()
 

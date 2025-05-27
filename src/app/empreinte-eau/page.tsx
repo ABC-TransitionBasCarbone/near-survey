@@ -17,7 +17,6 @@ import DidYouKnowWaterFootprint from './_components/DidYouKnowWaterFootprint'
 import FAQWaterFootprint from './_components/FAQWaterFootprint'
 import MotivationSectionWaterFootprint from './_components/MotivationSectionWaterFootprint'
 import UnderstandToActWaterFootprint from './_components/UnderstandToActWaterFootprint'
-import WaterFootprintPartners from './_components/WaterFootprintPartners'
 import WhatDoWeMeasureWaterFootprint from './_components/WhatDoWeMeasureWaterFootprint'
 import WhatItIsWaterFootprint from './_components/WhatItIsWaterFootprint'
 import { waterFAQJsonLd } from './_constants/waterFAQJsonLd'
@@ -116,8 +115,7 @@ export default async function WaterFootprintLandingPage() {
               "Un homme dans un magasin réfléchissant à l'empreinte eau du tee-shirt qu'il tient"
             )}
           />
-        }
-        heroPartners={<WaterFootprintPartners />}>
+        }>
         <WhatItIsWaterFootprint />
 
         <WhatDoWeMeasureWaterFootprint />

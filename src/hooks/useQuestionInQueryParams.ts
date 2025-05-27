@@ -1,5 +1,5 @@
 import { getLinkToSimulateur } from '@/helpers/navigation/simulateurPages'
-import type { DottedName } from '@incubateur-ademe/nosgestesclimat'
+import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 import { useLocale } from './useLocale'
@@ -11,7 +11,7 @@ export const useQuestionInQueryParams = () => {
 
   const locale = useLocale()
 
-  const questionInQueryParams = decodeURI(searchParams.get('question') || '')
+  const questionInQueryParams = decodeURI(searchParams?.get('question') || '')
     ?.replaceAll('.', ' . ')
     .replaceAll('_', ' ') as DottedName
 

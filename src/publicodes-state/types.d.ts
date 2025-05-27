@@ -1,9 +1,9 @@
-import type { Group } from '@/types/groups'
 import type {
   DottedName,
   Metrics,
+  NodeValue,
   SuggestionValue,
-} from '@incubateur-ademe/nosgestesclimat'
+} from '@abc-transitionbascarbone/near-modele'
 import type PublicodesEngine from 'publicodes'
 import type {
   ParsedRules as PublicodesParsedRules,
@@ -54,9 +54,13 @@ export type ComputedResultsFootprint = {
 }
 export type ComputedResults = Record<Metric, ComputedResultsFootprint>
 
+
+interface NearSituation {
+  [key: keyof Situation]: Situation[keyof Situation] | null
+}
 export type UpdateCurrentSimulationProps = {
   situation?: Situation
-  situationToAdd?: Situation
+  situationToAdd?: NearSituation
   foldedSteps?: DottedName[]
   foldedStepToAdd?: DottedName
   actionChoices?: any
@@ -69,7 +73,10 @@ export type UpdateCurrentSimulationProps = {
   groupToAdd?: string | null
   groupToDelete?: string | null
   savedViaEmail?: boolean
+  suggestions?: AideSaisie
 }
+
+export type AideSaisie = Record<DottedName, NodeValue>
 
 export type Simulation = {
   id: string
@@ -85,6 +92,7 @@ export type Simulation = {
   polls?: string[] | null
   groups?: string[] | null
   savedViaEmail?: boolean
+  suggestions: AideSaisie
 }
 
 export type LocalStorage = {
@@ -92,7 +100,6 @@ export type LocalStorage = {
   tutorials: Tutorials
   simulations: Simulation[]
   currentSimulationId: string
-  groupToRedirectToAfterTest?: Group
 }
 
 export type Metric = Metrics

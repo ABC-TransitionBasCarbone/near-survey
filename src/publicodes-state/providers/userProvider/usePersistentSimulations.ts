@@ -40,6 +40,7 @@ export default function usePersistentSimulations({
       setCurrentSimulationId(localCurrentSimulationId)
     } else {
       const newSimulation = generateSimulation()
+
       setSimulations([newSimulation])
       setCurrentSimulationId(newSimulation.id)
     }

@@ -1,5 +1,4 @@
 import FAQ from '@/components/landing-pages/FAQ'
-import Link from '@/components/Link'
 import Trans from '@/components/translation/Trans'
 import { getServerTranslation } from '@/helpers/getServerTranslation'
 
@@ -16,14 +15,13 @@ export default async function FAQWaterFootprint() {
             <>
               <p>
                 <Trans>
-                  Sur le site Nos Gestes Climat, le calcul de l'empreinte eau se
+                  Le calcul de l'empreinte eau se
                   fait simultanément avec le calcul de l'empreinte carbone.
                 </Trans>
               </p>
               <p>
                 <Trans>
-                  Au travers{' '}
-                  <Link href="/">du calculateur Nos Gestes Climat</Link>, nous
+                  Ainsi, nous
                   calculons{' '}
                   <strong className="text-primary-700">
                     la quantité d’eau consommée par chacun de vos usages

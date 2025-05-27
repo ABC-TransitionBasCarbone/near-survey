@@ -5,21 +5,21 @@ import {
   QUESTION_DESCRIPTION_BUTTON_ID,
 } from '@/constants/accessibility'
 import {
-  questionClickPass,
   questionClickPrevious,
-  questionClickSuivant,
 } from '@/constants/tracking/question'
 import Button from '@/design-system/inputs/Button'
 import { useClientTranslation } from '@/hooks/useClientTranslation'
 import { useMagicKey } from '@/hooks/useMagicKey'
-import { useCurrentSimulation, useForm, useRule } from '@/publicodes-state'
+import { useCurrentSimulation, useEngine, useForm, useRule } from '@/publicodes-state'
 import getValueIsOverFloorOrCeiling from '@/publicodes-state/helpers/getValueIsOverFloorOrCeiling'
 import { trackEvent } from '@/utils/matomo/trackEvent'
-import type { DottedName } from '@incubateur-ademe/nosgestesclimat'
+import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 import type { MouseEvent } from 'react'
 import { useCallback, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import SyncIndicator from './navigation/SyncIndicator'
+import { userAnswersKeys, calculatedResultsKeys } from '../../data/keys'
+import { safeEvaluateHelper } from '@/publicodes-state/helpers/safeEvaluateHelper'
 
 export default function Navigation({
   question,
@@ -33,11 +33,13 @@ export default function Navigation({
   isEmbedded?: boolean
 }) {
   const { t } = useClientTranslation()
+  const { engine } = useEngine()
 
   const { gotoPrevQuestion, gotoNextQuestion, noPrevQuestion, noNextQuestion } =
     useForm()
 
   const { isMissing, plancher, plafond, value } = useRule(question)
+
 
   const { updateCurrentSimulation } = useCurrentSimulation()
 
@@ -47,55 +49,119 @@ export default function Navigation({
     plancher,
   })
 
-  const isNextDisabled = isBelowFloor || isOverCeiling
+  const isNextDisabled = useMemo(() => {
+    return (isBelowFloor || isOverCeiling) || ((question.match("transport . voiture . utilisateur") || question.match('services sociétaux . su')) && (value === undefined));
+  }, [isBelowFloor, isOverCeiling, question, value]);
 
-  // Start time of the question
-  //(we need to use question to update the start time when the question changes, but it is not exactly usefull as a dependency)
-  const startTime = useMemo(() => {
-    if (question) {
-      return Date.now()
+  // Fonction pour préparer les données à envoyer
+  const prepareDataToSend = useCallback((JSONValue: any, voitures: { [key: string]: string }[], idValue: any) => {
+    if (!engine) return { calculatedResults: {}, answers: { userAnswers: {}, voitures }, broadcastChannel: '', broadcastId: '', neighborhoodId: '' };
+
+    const calculatedResults: { [key: string]: any } = {};
+    const userAnswers: { [key: string]: any } = {};
+    const simulationData = {
+      ...JSONValue.simulation.situation,
+      ...JSONValue.simulation.suggestions,
+    };
+
+    userAnswersKeys.forEach((key) => {
+      const value = simulationData[key];
+
+      if (value === null) {
+        userAnswers[key] = 'je ne sais pas';
+      } else {
+        userAnswers[key] = value;
+      }
+    });
+
+    calculatedResultsKeys.forEach((key) => {
+      calculatedResults[key] = safeEvaluateHelper(key, engine)?.nodeValue ?? 0;
+    });
+
+    return { calculatedResults, answers: { userAnswers, voitures }, broadcastChannel: idValue.broadcastChannel, broadcastId: idValue.broadcastId, neighborhoodId: idValue.neighborhoodId, id: JSONValue.simulation.id };
+  }, [engine]);
+
+
+  function getLastSimulationFromLocalStorage() {
+    const localStorageValue = localStorage.getItem('near::v1');
+    if (!localStorageValue) return null;
+
+    const JSONValue: any = JSON.parse(localStorageValue);
+    JSONValue.simulation = JSONValue.simulations.at(-1); // Dernière simulation
+    delete JSONValue.simulations;
+    return JSONValue;
+  }
+
+  // Fonction pour envoyer les données au serveur
+  const sendDataToServer = useCallback(async (data: { broadcastId: string, broadcastChannel: string, neighborhoodId: string, calculatedResults: { [key: string]: string }, answers: { userAnswers: { [key: string]: string }, voitures: { [key: string]: string }[] } }) => {
+    try {
+      const response = await fetch('/api/add-row', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ simulationResults: data }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Réponse du serveur:', result);
+      onComplete();
+    } catch (error) {
+      alert(
+        "Une erreur s'est produite lors de l'enregistrement de votre sondage. Réessayer dans quelques instants ou contactez xx.xx@xx.com"
+      );
+      console.error('Erreur lors de l’envoi des données au serveur:', error);
     }
-    return Date.now()
-  }, [question])
+  }, [onComplete]);
+
+
+  const { type, questionsOfMosaicFromParent } = useRule(question)
 
   const handleGoToNextQuestion = useCallback(
     async (e: KeyboardEvent | MouseEvent) => {
       e.preventDefault()
 
-      const endTime = Date.now()
-      const timeSpentOnQuestion = endTime - startTime
-
       if (isMissing) {
-        trackEvent(questionClickPass({ question, timeSpentOnQuestion }))
-      } else {
-        trackEvent(
-          questionClickSuivant({ question, answer: value, timeSpentOnQuestion })
-        )
-      }
-
-      if (isMissing) {
-        updateCurrentSimulation({ foldedStepToAdd: question })
+        if (type === 'mosaic') {
+          questionsOfMosaicFromParent.forEach((key) => {
+            updateCurrentSimulation({
+              situationToAdd: {
+                [key]: null
+              },
+              foldedStepToAdd: question
+            })
+          })
+        } else {
+          updateCurrentSimulation({
+            situationToAdd: {
+              [question]: null
+            },
+            foldedStepToAdd: question
+          })
+        }
       }
 
       handleMoveFocus()
-
       if (noNextQuestion) {
-        onComplete()
-        return
+        const JSONValue = getLastSimulationFromLocalStorage();
+        if (!JSONValue) return;
+
+        const idValue = JSON.parse(localStorage.getItem('near-id::v1') || '{}');
+
+        const localVoitures = localStorage.getItem('transport . voiture . km');
+        const voitures = localVoitures ? JSON.parse(localVoitures) : [];
+
+        const dataToSend = prepareDataToSend(JSONValue, voitures, idValue);
+
+        await sendDataToServer(dataToSend);
+        return;
       }
 
       gotoNextQuestion()
     },
-    [
-      question,
-      gotoNextQuestion,
-      noNextQuestion,
-      isMissing,
-      value,
-      onComplete,
-      updateCurrentSimulation,
-      startTime,
-    ]
+    [isMissing, noNextQuestion, gotoNextQuestion, type, questionsOfMosaicFromParent, updateCurrentSimulation, question, prepareDataToSend, sendDataToServer]
   )
 
   useMagicKey({
@@ -161,7 +227,7 @@ export default function Navigation({
           onClick={handleGoToNextQuestion}>
           {noNextQuestion
             ? t('Terminer')
-            : isMissing
+            : isMissing && !isNextDisabled
               ? t('Passer la question') + ' →'
               : t('Suivant') + ' →'}
         </Button>

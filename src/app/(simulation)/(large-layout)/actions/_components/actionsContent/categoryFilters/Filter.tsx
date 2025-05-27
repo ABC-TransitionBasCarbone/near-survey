@@ -8,7 +8,7 @@ import {
 } from '@/helpers/getCategoryColorClass'
 import { useRule } from '@/publicodes-state'
 import { trackEvent } from '@/utils/matomo/trackEvent'
-import type { DottedName } from '@incubateur-ademe/nosgestesclimat'
+import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 type Props = {
@@ -21,8 +21,8 @@ export default function Filter({ dottedName, countByCategory }: Props) {
 
   const router = useRouter()
 
-  const metric = useSearchParams().get('métrique') || ''
-  const categorySelected = useSearchParams().get('catégorie') || ''
+  const metric = useSearchParams()?.get('métrique') || ''
+  const categorySelected = useSearchParams()?.get('catégorie') || ''
 
   const isSelected = categorySelected === dottedName
 

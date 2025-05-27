@@ -19,7 +19,7 @@ export default function UnderstandToAct({
   pathname: string
 }) {
   return (
-    <div className="relative w-full bg-heroLightBackground py-16 md:py-20">
+    <div className="relative w-full bg-heroLightBackground py-16 md:py-20 mb-4">
       <div className="mx-auto flex max-w-full flex-col gap-4 px-4 md:max-w-5xl md:px-0">
         <h2
           className={twMerge(

@@ -99,7 +99,7 @@ export default async function FAQCarbonFootprint() {
 
               <p>
                 <Trans>
-                  Le simulateur en ligne Nos Gestes Climat permet d’estimer
+                  Ce simulateur permet d’estimer
                   votre empreinte écologique, la fois votre empreinte carbone et{' '}
                   <Link href="/empreinte-eau">votre empreinte eau</Link> en
                   moins de 10 minutes.
@@ -131,13 +131,6 @@ export default async function FAQCarbonFootprint() {
                   organisations (entreprises, collectivités) pour quantifier
                   leurs émissions sur une période donnée et établir un plan de
                   réduction.
-                </Trans>
-              </p>
-
-              <p className="mb-0">
-                <Trans>
-                  La méthodologie du bilan carbone a été développée
-                  par l’ADEME (Agence de la transition écologique).
                 </Trans>
               </p>
             </>
@@ -256,32 +249,6 @@ export default async function FAQCarbonFootprint() {
                   À l’échelle nationale, la France s’est fixée pour objectif
                   d’atteindre la neutralité carbone d’ici 2050, ce qui implique
                   de réduire drastiquement les émissions dans tous les secteurs.
-                </Trans>
-              </p>
-            </>
-          ),
-        },
-        {
-          question: (
-            <Trans>Quels pays émettent le plus de gaz à effet de serre ?</Trans>
-          ),
-          answer: (
-            <>
-              <p>
-                <Trans>
-                  La Chine et les États-Unis sont les deux plus grands émetteurs
-                  de gaz à effet de serre en raison de leur forte dépendance aux
-                  énergies fossiles (charbon, pétrole, gaz), de leurs industries
-                  énergivores ainsi que de la croissance rapide de leurs
-                  secteurs de transport et de production manufacturière.
-                </Trans>
-              </p>
-
-              <p className="mb-0">
-                <Trans>
-                  La France représente environ 1% des émissions globales mais
-                  une partie majeure de son impact est indirecte et liée aux
-                  importations de produits fabriqués massivement à l’étranger.
                 </Trans>
               </p>
             </>

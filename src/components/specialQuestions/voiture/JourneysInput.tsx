@@ -3,12 +3,11 @@ import type { Journey } from '@/types/journey'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-import type { DottedName } from '@incubateur-ademe/nosgestesclimat'
 import { JourneysInputDesktop } from './journeysInput/JourneysInputDesktop'
 import JourneysInputMobile from './journeysInput/JourneysInputMobile'
 
 type Props = {
-  question: DottedName
+  question: string
   setTempValue?: (value: number | undefined) => void
 }
 
@@ -24,7 +23,7 @@ function roundFloat(value: number, precision: number = 10): number {
 }
 
 export default function JourneysInput({ question, setTempValue }: Props) {
-  const { setValue } = useRule(question)
+  const { value, setValue } = useRule(question)
 
   const { setValue: setNumPassengers } = useRule(
     'transport . voiture . voyageurs'
@@ -50,8 +49,8 @@ export default function JourneysInput({ question, setTempValue }: Props) {
       (accumulator, currentValue) =>
         accumulator +
         currentValue.distance *
-          currentValue.reccurrence *
-          periods[currentValue.period],
+        currentValue.reccurrence *
+        periods[currentValue.period],
       0
     )
     const roundedTotal = roundFloat(rawTotal)
@@ -67,9 +66,9 @@ export default function JourneysInput({ question, setTempValue }: Props) {
           (accumulator, currentValue) =>
             accumulator +
             currentValue.passengers *
-              currentValue.distance *
-              currentValue.reccurrence *
-              periods[currentValue.period],
+            currentValue.distance *
+            currentValue.reccurrence *
+            periods[currentValue.period],
           0
         ) / total
       const roundedAveragePassengers = roundFloat(rawAveragePassengers)
@@ -86,7 +85,8 @@ export default function JourneysInput({ question, setTempValue }: Props) {
 
   useEffect(() => {
     setNumPassengers(averagePassengers)
-  }, [averagePassengers, setNumPassengers])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
 
   useEffect(() => {
     if (prevTotal.current !== total) {
