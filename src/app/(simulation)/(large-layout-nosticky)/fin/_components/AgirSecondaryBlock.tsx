@@ -1,4 +1,3 @@
-import Logo from '@/components/misc/Logo'
 import Trans from '@/components/translation/Trans'
 import Badge from '@/design-system/layout/Badge'
 import { useClientTranslation } from '@/hooks/useClientTranslation'
@@ -44,7 +43,6 @@ export default function AgirSecondaryBlock() {
             width="60"
             height="60"
           />
-          <Logo size="sm" />
         </div>
       </div>
     </div>

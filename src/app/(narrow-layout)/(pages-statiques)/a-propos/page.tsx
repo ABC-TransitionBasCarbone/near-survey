@@ -1,19 +1,17 @@
 import PasserTestBanner from '@/components/layout/PasserTestBanner'
 import MDXContent from '@/components/mdx/MDXContent'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import AboutEn from '@/locales/pages/en/about.mdx'
 import AboutEs from '@/locales/pages/es/about.mdx'
 import AboutFr from '@/locales/pages/fr/about.mdx'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t('À propos - Nos Gestes Climat'),
-    description: t('Informations relatives à Nos Gestes Climat.'),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/a-propos',
+      canonical: '',
     },
   })
 }

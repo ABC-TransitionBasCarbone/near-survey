@@ -6,15 +6,12 @@ import Actions from './_components/Actions'
 import LinkList from './_components/LinkList'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t('Plan du site - Nos Gestes Climat'),
-    description: t(
-      'Retrouvez toutes les pages du site nosgestesclimat.fr pour calculer votre empreinte carbone.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/plan-du-site',
+      canonical: '',
     },
   })
 }

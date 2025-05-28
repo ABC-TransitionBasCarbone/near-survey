@@ -28,7 +28,7 @@ type Props = {
 const BASE_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'https://nosgestesclimat.fr'
+    : 'https://enquete-carbone.projetnear.org/'
 
 const buildURL = ({
   params,
@@ -103,8 +103,6 @@ export function getMetadataObject({
       url,
       type: 'website',
       images: image
-        ? image
-        : 'https://nosgestesclimat.fr/images/misc/metadata.png',
     },
     alternates: alternatesWithLanguages,
     ...props,

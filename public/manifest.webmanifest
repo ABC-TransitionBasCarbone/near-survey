@@ -1,5 +1,5 @@
 {
-  "name": "Nos Gestes Climat",
+  "name": "NEAR",
   "description": "Calcule ton empreinte sur le climat",
   "display": "standalone",
   "lang": "fr",
@@ -7,9 +7,9 @@
   "theme_color": "#4949ba",
   "icons": [
     {
-      "src": "/images/misc/logo.svg",
+      "src": "/images/misc/near-logo.png",
       "sizes": "144x144",
-      "type": "image/svg+xml"
+      "type": "image/png"
     }
   ]
 }

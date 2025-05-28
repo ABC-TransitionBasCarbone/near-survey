@@ -22,17 +22,13 @@ import WhatItIsWaterFootprint from './_components/WhatItIsWaterFootprint'
 import { waterFAQJsonLd } from './_constants/waterFAQJsonLd'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t('Empreinte eau : comprendre, évaluer, économiser l’eau'),
-    description: t(
-      'Découvrez les litres d’eau cachés derrière chacun de vos repas, vêtements, appareils… Adoptez des actions concrètes pour réduire votre empreinte eau'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/empreinte-eau',
+      canonical: '',
     },
-    image: '/images/misc/calculer-son-empreinte-eau.png',
   })
 }
 

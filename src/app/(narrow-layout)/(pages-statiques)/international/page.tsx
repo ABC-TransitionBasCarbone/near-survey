@@ -12,15 +12,12 @@ import { getLinkToSimulateur } from '@/helpers/navigation/simulateurPages'
 import Image from 'next/image'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t('Le calculateur d’empreinte climat international'),
-    description: t(
-      'Où que vous vivez, calculez votre empreinte carbone personnelle avec les particularités de votre pays.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/international',
+      canonical: '',
     },
   })
 }
@@ -103,7 +100,7 @@ export default async function International() {
               Nous utilisons, quand disponible, l'empreinte du mix électrique
               fournie par :
             </Trans>
-             
+
             <Link
               className="inline"
               href="https://app.electricitymaps.com/map"

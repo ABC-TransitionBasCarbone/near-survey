@@ -1,21 +1,18 @@
 import Trans from '@/components/translation/Trans'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import { PrivacyPolicy } from '@incubateur-ademe/legal-pages-react/PrivacyPolicy'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t('Politique de confidentialité - Nos Gestes Climat'),
-    description: t(
-      'Découvrez comment nous utilisons vos données personnelles pour vous proposer un calculateur de bilan carbone personnel.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/politique-de-confidentialite',
+      canonical: '',
     },
   })
 }
+
 
 export default function ViePriveePage() {
   return (
