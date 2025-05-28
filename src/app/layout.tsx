@@ -59,7 +59,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
     return (
       <html lang={lang ?? ''} dir={dir(lang ?? '')}>
         <head>
-          <link rel="icon" href="/favicon.png" />
+          <link rel="icon" href="/images/misc/near-logo.png" />
 
           <meta
             name="google-site-verification"

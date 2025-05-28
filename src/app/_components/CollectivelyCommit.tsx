@@ -1,6 +1,7 @@
 import MotivationSection from '@/components/landing-pages/MotivationSection'
 import Trans from '@/components/translation/Trans'
 import nearlogo from '../../../public/images/misc/near-logo.png'
+import Image from 'next/image'
 
 export default async function CollectivelyCommit() {
   return (
@@ -24,8 +25,10 @@ export default async function CollectivelyCommit() {
           </div>
         }
       />
+      <div className="flex items-center justify-center" style={{ width: '15rem', alignSelf: 'center' }}>
+        <Image src={nearlogo} alt="logo" width={1619} height={814} />
+      </div>
       <MotivationSection
-        image={nearlogo}
         title={
           <Trans>NEAR qu'est-ce que c'est ?</Trans>
         }
