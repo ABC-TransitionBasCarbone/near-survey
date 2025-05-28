@@ -1,5 +1,6 @@
 import MotivationSection from '@/components/landing-pages/MotivationSection'
 import Trans from '@/components/translation/Trans'
+import nearlogo from '../../../public/images/misc/near-logo.png'
 
 export default async function CollectivelyCommit() {
   return (
@@ -24,6 +25,7 @@ export default async function CollectivelyCommit() {
         }
       />
       <MotivationSection
+        image={nearlogo}
         title={
           <Trans>NEAR qu'est-ce que c'est ?</Trans>
         }

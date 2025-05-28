@@ -11,18 +11,16 @@ import { currentLocale } from 'next-i18n-router'
 import Image from 'next/image'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t('Les nouveautés - Nos Gestes Climat'),
-    description: t(
-      'Consultez les nouvelles fonctionnalités et dernières nouvelles de Nos Gestes Climat.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/nouveautes',
+      canonical: '',
     },
   })
 }
+
 
 export default async function Releases() {
   const locale = currentLocale()

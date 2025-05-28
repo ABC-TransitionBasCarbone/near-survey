@@ -1,5 +1,4 @@
 import MDXContent from '@/components/mdx/MDXContent'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import contentEnBottom from '@/locales/pages/en/budgetBottom.mdx'
 import contentEnTop from '@/locales/pages/en/budgetTop.mdx'
@@ -10,12 +9,12 @@ import contentFrTop from '@/locales/pages/fr/budgetTop.mdx'
 import SelectYear from './_components/SelectYear'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
   return getMetadataObject({
-    title: t('Budget - Nos Gestes Climat'),
-    description: t('Informations relatives au budget de Nos Gestes Climat.'),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/budget',
+      canonical: '',
     },
   })
 }

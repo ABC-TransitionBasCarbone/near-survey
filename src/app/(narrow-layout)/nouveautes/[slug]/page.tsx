@@ -2,26 +2,22 @@ import Link from '@/components/Link'
 import PasserTestBanner from '@/components/layout/PasserTestBanner'
 import Trans from '@/components/translation/Trans'
 import Markdown from '@/design-system/utils/Markdown'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getPost } from '@/helpers/markdown/getPost'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
-import { capitalizeString } from '@/utils/capitalizeString'
 import { currentLocale } from 'next-i18n-router'
 
 type Props = {
   params: { slug: string }
 }
 
-export async function generateMetadata({ params: { slug } }: Props) {
-  const { t } = await getServerTranslation()
-
+export async function generateMetadata() {
   return getMetadataObject({
-    title: `${capitalizeString(decodeURI(slug))?.replaceAll(
-      '-',
-      ' '
-    )}, ${t('nouveautés - Nos Gestes Climat')}`,
-    description: t('Découvrez les nouveautés du site Nos Gestes Climat.'),
-    params: { slug },
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
+    alternates: {
+      canonical: '',
+    },
   })
 }
 

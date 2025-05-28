@@ -16,6 +16,8 @@ import { twMerge } from 'tailwind-merge'
 import NavLink from './NavLink'
 import ProfileIcon from './_components/ProfileIcon'
 import DebugIndicator from './headerDesktop/DebugIndicator'
+import Image from 'next/image'
+import nearlogo from '../../../../public/images/misc/near-logo.png'
 
 type Props = {
   isSticky: boolean
@@ -32,6 +34,9 @@ export default function HeaderDesktop({ isSticky }: Props) {
         isSticky ? 'sticky top-0 z-50' : ''
       )}>
       <div className="absolute bottom-0 left-0 right-0 top-0 flex h-20 w-full items-center border-b bg-white shadow-sm">
+        <div className="flex origin-left items-center justify-center" style={{ width: '10rem' }}>
+          <Image src={nearlogo} alt="logo" width={1619} height={814} />
+        </div>
         <div className="mx-auto flex h-full w-full max-w-5xl items-center justify-between gap-6">
           <nav className="h-full">
             <ul className="flex h-full flex-1 justify-start gap-4">

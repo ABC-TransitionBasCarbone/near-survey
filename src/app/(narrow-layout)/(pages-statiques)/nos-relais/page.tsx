@@ -8,14 +8,12 @@ import ambassadeursYaml from '@/locales/ambassadeurs/fr/ambassadeurs.yaml'
 import Image from 'next/image'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
   return getMetadataObject({
-    title: t('Nos relais - Nos Gestes Climat'),
-    description: t(
-      'Découvrez les relais de Nos Gestes Climat : organisations, collectivités, médias, influenceurs, etc.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/nos-relais',
+      canonical: '',
     },
   })
 }
@@ -40,7 +38,7 @@ export default async function NosRelais() {
           <p>
             <Trans>
               Plus de 40 acteurs relaient ou ont relayé Nos Gestes Climat à
-              travers 
+              travers
               <a
                 href="https://accelerateur-transition-ecologique-ademe.notion.site/Int-grer-Nos-Gestes-Climat-en-iframe-abdeb175baf84143922006964d80348c"
                 target="_blank"

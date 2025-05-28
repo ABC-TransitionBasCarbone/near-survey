@@ -4,34 +4,25 @@ import Trans from '@/components/translation/Trans'
 import Badge from '@/design-system/layout/Badge'
 import Title from '@/design-system/layout/Title'
 import Markdown from '@/design-system/utils/Markdown'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getPost } from '@/helpers/markdown/getPost'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
-import { capitalizeString } from '@/utils/capitalizeString'
 import { notFound } from 'next/navigation'
 
 type Props = {
   params: { slug: string }
 }
 
-export async function generateMetadata({ params: { slug } }: Props) {
-  const { t } = await getServerTranslation()
-
-  const post = await getPost('src/locales/blog/fr/', slug)
-
+export async function generateMetadata() {
   return getMetadataObject({
-    title: `${capitalizeString(decodeURI(slug))?.replaceAll(
-      '-',
-      ' '
-    )}, ${t('article du blog - Nos Gestes Climat')}`,
-    description: t('Découvrez les articles de blog du site Nos Gestes Climat.'),
-    params: { slug },
-    image: post?.data?.image,
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: `/blog/${slug}`,
+      canonical: '',
     },
   })
 }
+
 
 export default async function BlogPost({ params: { slug } }: Props) {
   const post = await getPost('src/locales/blog/fr/', slug)

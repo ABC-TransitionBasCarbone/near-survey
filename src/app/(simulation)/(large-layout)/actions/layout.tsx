@@ -1,27 +1,22 @@
 import NorthStarBanner from '@/components/northstar/NorthstarBanner'
 import Total from '@/components/total/Total'
 import Trans from '@/components/translation/Trans'
-import { noIndexObject } from '@/constants/metadata'
 import Title from '@/design-system/layout/Title'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import { FormProvider } from '@/publicodes-state'
 import type { PropsWithChildren } from 'react'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t(
-      'Actions : comment réduire votre empreinte climat ? - Nos Gestes Climat'
-    ),
-    description: t('Quelles sont les actions les plus efficaces ?'),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/actions',
+      canonical: '',
     },
-    robots: noIndexObject,
   })
 }
+
 
 export default function ActionsLayout({ children }: PropsWithChildren) {
   return (

@@ -1,24 +1,17 @@
-import { noIndexObject } from '@/constants/metadata'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import type { PropsWithChildren } from 'react'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t(
-      "Vos résultats, calculateur d'empreinte climat - Nos Gestes Climat"
-    ),
-    description: t(
-      "Vos résultats de tests de notre calculateur d'empreinte carbone."
-    ),
-    robots: noIndexObject,
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/fin',
+      canonical: '',
     },
   })
 }
+
 
 export default function Layout({ children }: PropsWithChildren) {
   return <>{children}</>

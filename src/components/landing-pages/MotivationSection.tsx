@@ -1,13 +1,16 @@
 import Separator from '@/design-system/layout/Separator'
+import Image, { type StaticImageData } from 'next/image'
 import type { ReactNode } from 'react'
 
 export default function MotivationSection({
   title,
   description,
+  image,
   motivationItems,
 }: {
   title: ReactNode
   description: ReactNode
+  image?: StaticImageData
   motivationItems?: {
     title: ReactNode
     icon: ReactNode
@@ -17,6 +20,9 @@ export default function MotivationSection({
   return (
     <section className="w-full pb-10 pt-16 md:py-20">
       <div className="mx-auto flex max-w-full flex-col gap-4 px-4 md:max-w-5xl md:px-0">
+        {image && <div className="flex items-center justify-center" style={{ width: '15rem', alignSelf: 'center' }}>
+          <Image src={image} alt="logo" width={1619} height={814} />
+        </div>}
         <h2 className="!mb-0 text-center text-2xl md:text-3xl">{title}</h2>
 
         <Separator className="mx-auto my-0" />

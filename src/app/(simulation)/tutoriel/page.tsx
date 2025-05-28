@@ -3,8 +3,6 @@ import Title from '@/design-system/layout/Title'
 import ButtonStart from './_components/ButtonStart'
 
 import ContentLarge from '@/components/layout/ContentLarge'
-import { noIndexObject } from '@/constants/metadata'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import { twMerge } from 'tailwind-merge'
 import AutresQuestions from './_components/AutresQuestions'
@@ -13,19 +11,13 @@ import ButtonBack from './_components/ButtonBack'
 import OrganisationMessage from './_components/OrganisationMessage'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t(
-      'Calculer votre empreinte carbone individuelle - Nos Gestes Climat'
-    ),
-    description: t(
-      'Comprenez comment calculer votre empreinte sur le climat en 10min chrono.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/tutoriel',
+      canonical: '',
     },
-    robots: noIndexObject,
   })
 }
 

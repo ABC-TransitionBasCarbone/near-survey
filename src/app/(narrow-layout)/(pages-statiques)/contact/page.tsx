@@ -9,15 +9,16 @@ import Image from 'next/image'
 import Script from 'next/script'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
   return getMetadataObject({
-    title: t('Contact - Nos Gestes Climat'),
-    description: t("Contactez l'équipe de Nos Gestes Climat."),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/contact',
+      canonical: '',
     },
   })
 }
+
 
 export default async function Contact() {
   const { t } = await getServerTranslation()
