@@ -1,5 +1,5 @@
 import Separator from '@/design-system/layout/Separator'
-import Image, { StaticImageData } from 'next/image'
+import Image, { type StaticImageData } from 'next/image'
 import type { ReactNode } from 'react'
 
 export default function MotivationSection({
