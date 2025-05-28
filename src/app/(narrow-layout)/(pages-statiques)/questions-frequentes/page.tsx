@@ -19,17 +19,12 @@ type FAQType = {
 }
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t(
-      "Questions fréquentes sur notre calcul d'empreinte climat - Nos Gestes Climat"
-    ),
-    description: t(
-      'Retrouvez les réponses aux questions les plus fréquentes sur  Nos Gestes Climat.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/questions-frequentes',
+      canonical: '',
     },
   })
 }

@@ -2,7 +2,6 @@ import Route404 from '@/components/layout/404'
 import MDXContent from '@/components/mdx/MDXContent'
 import Trans from '@/components/translation/Trans'
 import ButtonLink from '@/design-system/inputs/ButtonLink'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import guideAlimentation from '@/locales/guide-mode-groupe/fr/guide-alimentation.mdx'
 import guideDivers from '@/locales/guide-mode-groupe/fr/guide-divers.mdx'
@@ -20,20 +19,13 @@ const categories: Record<string, any> = {
   transport: guideTransport,
 }
 
-export async function generateMetadata({
-  params: { category },
-}: {
-  params: { category: string }
-}) {
-  const { t } = await getServerTranslation()
-
+export async function generateMetadata() {
   return getMetadataObject({
-    title: t('Le guide - Nos Gestes Climat'),
-    description: t(
-      'Retrouvez dans ce guide toutes les informations sur Nos Gestes Climat.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: `/guide/${category}`,
+      canonical: '',
     },
   })
 }

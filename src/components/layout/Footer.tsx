@@ -11,7 +11,6 @@ import {
   footerClickFAQ,
   footerClickImpactco2,
   footerClickInternational,
-  footerClickLogo,
   footerClickNouveautes,
   footerClickPlanSite,
   footerClickQuiSommesNous,
@@ -24,7 +23,6 @@ import { trackEvent } from '@/utils/matomo/trackEvent'
 import { usePathname } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 import Link from '../Link'
-import Logo from '../misc/Logo'
 import LanguageSwitchButton from '../translation/LanguageSwitchButton'
 import Trans from '../translation/Trans'
 
@@ -49,7 +47,6 @@ export default function Footer({ className = '' }) {
         isHomePage ? 'bg-white' : ''
       )}>
       <div className="flex w-full flex-col items-start gap-2 md:max-w-5xl md:flex-row md:gap-12">
-        <Logo onClick={() => trackEvent(footerClickLogo)} />
 
         <div className="flex-1">
           <div className="flex flex-col flex-wrap justify-start gap-x-5 gap-y-2 pt-4 sm:flex-row md:items-center">

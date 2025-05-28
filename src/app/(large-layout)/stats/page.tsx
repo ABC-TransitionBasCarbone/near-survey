@@ -1,17 +1,13 @@
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import StatsContent from './_components/StatsContent'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t("Nos Statistiques d'utilisation - Nos Gestes Climat"),
-    description: t(
-      "Observez l'évolution de l'impact de Nos Gestes Climat en mesures chiffrées."
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/stats',
+      canonical: '',
     },
   })
 }

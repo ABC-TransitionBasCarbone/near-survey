@@ -1,4 +1,3 @@
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import { getRules } from '@/helpers/modelFetching/getRules'
 import { getSupportedRegions } from '@/helpers/modelFetching/getSupportedRegions'
@@ -6,25 +5,17 @@ import { currentLocale } from 'next-i18n-router'
 import DocumentationRouter from './_components/DocumentationRouter'
 import DocumentationServer from './_components/documentationRouter/DocumentationServer'
 
-export async function generateMetadata({
-  params: { slug },
-}: {
-  params: { slug: string[] }
-}) {
-  const { t } = await getServerTranslation()
-
+export async function generateMetadata() {
   return getMetadataObject({
-    title: t(
-      "Documentation, votre calculateur d'empreinte carbone - Nos Gestes Climat"
-    ),
-    description: t(
-      'Notre documentation détaille les calculs qui nous ont permis de calculer votre bilan carbone personnel.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: `/documentation/${slug.join('/')}`,
+      canonical: '',
     },
   })
 }
+
 
 // The page content is in layout.tsx in order to persist the state
 // between the server and the client

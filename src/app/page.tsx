@@ -1,6 +1,5 @@
 import Trans from '@/components/translation/Trans'
 import LandingPage from '@/design-system/layout/LandingPage'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import Partners from '../components/landing-pages/Partners'
 import CollectivelyCommit from './_components/CollectivelyCommit'
@@ -13,13 +12,10 @@ import { headers } from 'next/headers'
 import { trackingActionClickCTA } from '@/constants/tracking/actions'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
   return getMetadataObject({
-    title: t('Calculez votre empreinte carbone et eau en 10 minutes !'),
-    description: t(
-      "2 millions de personnes ont déjà calculé leur empreinte sur le climat avec le calculateur Nos Gestes Climat ! Et vous, qu'attendez-vous pour faire le test ?"
-    ),
-    image: '/images/misc/calculer-empreinte-carbone-et-eau.png',
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
       canonical: '',
     },

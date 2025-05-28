@@ -1,15 +1,17 @@
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import { LegalNotice } from '@incubateur-ademe/legal-pages-react/LegalNotice'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t('Mentions légales - Nos Gestes Climat'),
-    description: t('Mentions légales du site Nos Gestes Climat.'),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
+    alternates: {
+      canonical: '',
+    },
   })
 }
+
 
 export default function MentionsLegalesPage() {
   return (

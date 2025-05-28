@@ -1,20 +1,14 @@
 import PasserTestBanner from '@/components/layout/PasserTestBanner'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import DocumentationLanding from './_components/DocumentationLanding'
 
 export async function generateMetadata() {
-  const { t } = await getServerTranslation()
-
   return getMetadataObject({
-    title: t(
-      "Documentation, votre calculateur d'empreinte carbone - Nos Gestes Climat"
-    ),
-    description: t(
-      'Notre documentation détaille les calculs qui nous ont permis de calculer votre bilan carbone personnel.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: '/documentation',
+      canonical: '',
     },
   })
 }

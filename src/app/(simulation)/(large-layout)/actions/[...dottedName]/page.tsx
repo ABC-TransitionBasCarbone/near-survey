@@ -1,26 +1,16 @@
 import Trans from '@/components/translation/Trans'
 import ButtonLink from '@/design-system/inputs/ButtonLink'
-import { getServerTranslation } from '@/helpers/getServerTranslation'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 import ActionDetail from './_components/ActionDetail'
 
-export async function generateMetadata({
-  params: { dottedName },
-}: {
-  params: { dottedName: DottedName[] }
-}) {
-  const { t } = await getServerTranslation()
-
+export async function generateMetadata() {
   return getMetadataObject({
-    title: t(
-      "Actions, suite à votre simulation d'empreinte climat - Nos Gestes Climat"
-    ),
-    description: t(
-      'Découvrez les actions que vous pouvez mettre en place pour réduire votre empreinte carbone.'
-    ),
+    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
+    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    image: 'images/misc/near-logo.png',
     alternates: {
-      canonical: `/actions/${dottedName.join('/')}`,
+      canonical: '',
     },
   })
 }
