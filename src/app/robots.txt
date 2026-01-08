@@ -7,4 +7,24 @@ Disallow: /quiz/*
 Disallow: /partage/*
 Disallow: /tutoriel/*
 
+
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+User-agent: AnthropicAI
+Disallow: /
+User-agent: GeminiBot
+Disallow: /
+User-agent: BingAI
+Disallow: /
+User-agent: PerplexityBot
+Disallow: /
+User-agent: YouBot
+Disallow: /
+User-agent: OpenAI-User
+Disallow: /
+
 Sitemap: https://nosgestesclimat.fr/sitemap.xml
