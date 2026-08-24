@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@abc-transitionbascarbone/near-modele@1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@abc-transitionbascarbone/near-modele/-/near-modele-1.0.7.tgz#26857921b065044617f794cb87eccd7abc71423c"
-  integrity sha512-2ObHMAsZTcjygr+fuDmf5X1snfS1uJjrWxqGLmNopy+s28EiWVQq9iXPbeb98x/jw0k3rl2HIhd5+TqOxNwIBQ==
+"@abc-transitionbascarbone/near-modele@1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@abc-transitionbascarbone/near-modele/-/near-modele-1.0.8.tgz#1e7087d023a59d7bd9731f57e4307419f61573aa"
+  integrity sha512-FjITY/frDjAgtISSpP9qKMdpqw+Ge4cBiTBagM8RsyH/KW4XtctBzsFPPxIwKmh5eOitGkwuzk7eTlYlrgl9lg==
 
 "@alloc/quick-lru@^5.2.0":
   version "5.2.0"
