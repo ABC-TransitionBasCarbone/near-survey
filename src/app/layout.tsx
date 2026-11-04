@@ -2,9 +2,9 @@ import { getGeolocation } from '@/helpers/getGeolocation'
 import { getServerLocale } from '@/helpers/getServerLocale'
 import '@/locales/initClient'
 import '@/locales/initServer'
+import { marianne } from './marianne'
 import { dir } from 'i18next'
 import dynamic from 'next/dynamic'
-import localFont from 'next/font/local'
 import Script from 'next/script'
 import type { PropsWithChildren } from 'react'
 import MainLayoutProviders from './_components/MainLayoutProviders'
@@ -13,42 +13,6 @@ import './globals.css'
 const ClientErrorContent = dynamic(
   () => import('@/components/error/ErrorContent')
 )
-
-export const marianne = localFont({
-  src: [
-    {
-      path: '../../public/fonts/Marianne-Thin.woff2',
-      weight: '100',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/Marianne-Light.woff2',
-      weight: '300',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/Marianne-Regular.woff2',
-      weight: 'normal',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/Marianne-Medium.woff2',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/Marianne-Bold.woff2',
-      weight: 'bold',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/Marianne-ExtraBold.woff2',
-      weight: '800',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-marianne',
-})
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   try {
