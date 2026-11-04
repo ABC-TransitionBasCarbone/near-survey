@@ -2,18 +2,19 @@ import Link from '@/components/Link'
 import PasserTestBanner from '@/components/layout/PasserTestBanner'
 import Trans from '@/components/translation/Trans'
 import Markdown from '@/design-system/utils/Markdown'
+import { getServerLocale } from '@/helpers/getServerLocale'
 import { getPost } from '@/helpers/markdown/getPost'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
-import { currentLocale } from 'next-i18n-router'
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata() {
   return getMetadataObject({
-    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
-    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    title: 'Calculez votre empreinte carbone et eau en 10 minutes !',
+    description:
+      "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
     image: 'images/misc/near-logo.png',
     alternates: {
       canonical: '',
@@ -21,8 +22,10 @@ export async function generateMetadata() {
   })
 }
 
-export default async function Release({ params: { slug } }: Props) {
-  const locale = currentLocale()
+export default async function Release({ params }: Props) {
+  const { slug } = await params
+
+  const locale = await getServerLocale()
   const nouveaute = await getPost(`src/locales/nouveautes/${locale}/`, slug)
 
   return (

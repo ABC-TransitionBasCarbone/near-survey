@@ -5,7 +5,7 @@ import splitTestingMiddleware from './middlewares/splitTestingMiddleware'
 
 export const middlewares = [splitTestingMiddleware, i18nMiddleware]
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const response = NextResponse.next()
 
   for await (const middlewareFunction of middlewares) {

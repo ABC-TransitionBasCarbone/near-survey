@@ -12,21 +12,30 @@ function getLandingCategory(pathname: string | null) {
 }
 
 // Click CTA
-export const getLandingClickCTAStart = (pathname: string | null, action: string) => [
+export const getLandingClickCTAStart = (
+  pathname: string | null,
+  action: string
+) => [
   'trackEvent',
   getLandingCategory(pathname),
   action,
   'Click Passer le test',
 ]
 
-export const getLandingClickCTAResume = (pathname: string | null, action: string) => [
+export const getLandingClickCTAResume = (
+  pathname: string | null,
+  action: string
+) => [
   'trackEvent',
   getLandingCategory(pathname),
   action,
   'Click Reprendre le test',
 ]
 
-export const getLandingClickCTAResults = (pathname: string | null, action: string) => [
+export const getLandingClickCTAResults = (
+  pathname: string | null,
+  action: string
+) => [
   'trackEvent',
   getLandingCategory(pathname),
   action,
@@ -43,7 +52,10 @@ export const getLandingClickCTARestart = (pathname: string, action: string) => [
 export const getLandingDidYouKnowSliderValue = (number: number) =>
   `Passer le test écran ${number}`
 
-export const getLandingDidYouKnowSlider = (pathname: string | null, value: string) => [
+export const getLandingDidYouKnowSlider = (
+  pathname: string | null,
+  value: string
+) => [
   'trackEvent',
   getLandingCategory(pathname),
   'Click bannière le saviez vous',

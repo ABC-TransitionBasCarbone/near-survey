@@ -1,4 +1,5 @@
 import type { TransPropsWithInterpolation } from '@/types/translation'
+import type { JSX } from 'react'
 import TransClient from './trans/TransClient'
 import TransServer from './trans/TransServer'
 

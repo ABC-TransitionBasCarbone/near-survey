@@ -1,7 +1,10 @@
 'use client'
 
 import { carboneMetric } from '@/constants/metric'
-import type { DottedName, NGCRuleNode } from '@abc-transitionbascarbone/near-modele'
+import type {
+  DottedName,
+  NGCRuleNode,
+} from '@abc-transitionbascarbone/near-modele'
 import type { EvaluatedNode } from 'publicodes'
 import { utils } from 'publicodes'
 import { useContext, useMemo } from 'react'

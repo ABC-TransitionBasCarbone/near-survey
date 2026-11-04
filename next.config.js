@@ -1,5 +1,5 @@
 //@ts-check
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 const withMDX = require('@next/mdx')({
   extension: /\.mdx$/,
 })
@@ -20,8 +20,22 @@ const nextConfig = {
     // @ts-expect-error remotePatterns is not typed
     remotePatterns: remoteImagesPatterns,
   },
+  turbopack: {
+    rules: {
+      '*.yaml': {
+        loaders: ['yaml-loader'],
+      },
+    },
+  },
   async redirects() {
     return redirects
+  },
+  outputFileTracingExcludes: {
+    '*': ['.next/cache/webpack', '.git/**/*', 'cypress/**/*'],
+    '/blog': ['public/NGC_Kit.diffusion.zip'],
+    '/nouveautes': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
+    '/actions/plus': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
+    '/sitemap.xml': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
   },
   webpack: (config, { dev, isServer }) => {
     if (config.cache) {
@@ -67,22 +81,8 @@ const nextConfig = {
   },
   productionBrowserSourceMaps: true,
   experimental: {
-    outputFileTracingExcludes: {
-      '*': ['.next/cache/webpack', '.git/**/*', 'cypress/**/*'],
-      '/blog': ['public/NGC_Kit.diffusion.zip'],
-      '/nouveautes': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
-      '/actions/plus': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
-      '/sitemap.xml': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
-    },
     optimizePackageImports: ['@abc-transitionbascarbone/near-modele'],
     webpackBuildWorker: true,
-    turbo: {
-      rules: {
-        '*.yaml': {
-          loaders: ['yaml-loader'],
-        },
-      },
-    },
   },
 }
 

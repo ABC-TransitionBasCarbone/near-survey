@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "22"
+          node-version: "24"
 
       - uses: actions/cache@v3
         with:
@@ -32,4 +32,3 @@ jobs:
 
       - name: Build
         run: yarn run build
-

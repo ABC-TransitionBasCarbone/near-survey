@@ -46,7 +46,7 @@ export function generateSimulation({
     polls,
     groups,
     savedViaEmail,
-    suggestions
+    suggestions,
   } as Simulation
 
   try {

@@ -54,7 +54,6 @@ export type ComputedResultsFootprint = {
 }
 export type ComputedResults = Record<Metric, ComputedResultsFootprint>
 
-
 interface NearSituation {
   [key: keyof Situation]: Situation[keyof Situation] | null
 }
