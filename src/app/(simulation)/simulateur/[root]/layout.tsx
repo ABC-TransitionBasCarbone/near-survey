@@ -1,6 +1,7 @@
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import { FormProvider } from '@/publicodes-state'
 import type { DottedName } from '@abc-transitionbascarbone/near-modele'
+import type { ReactNode } from 'react'
 
 export async function generateMetadata() {
   return getMetadataObject({
@@ -17,7 +18,10 @@ export async function generateMetadata() {
 export default async function Layout({
   params,
   children,
-}: LayoutProps<'/simulateur/[root]'>) {
+}: {
+  params: Promise<{ root: string }>
+  children: ReactNode
+}) {
   const { root } = await params
 
   return <FormProvider root={root as DottedName}>{children}</FormProvider>
