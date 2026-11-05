@@ -3,8 +3,8 @@ import { carboneMetric, eauMetric } from '@/constants/metric'
 import Emoji from '@/design-system/utils/Emoji'
 import { useClientTranslation } from '@/hooks/useClientTranslation'
 import type { Metrics } from '@abc-transitionbascarbone/near-modele'
-import type { Options} from 'react-select';
-import Select, { components } from 'react-select'
+import type { Options } from 'react-select'
+import Select from 'react-select'
 import Trans from '../translation/Trans'
 
 interface OptionType {
@@ -86,22 +86,6 @@ export default function FootprintSelector({
     }),
   }
 
-  const customComponents = {
-    SingleValue: ({ children, ...props }: any) => (
-      <components.SingleValue {...props}>
-        <div className="flex flex-col">
-          <div
-            id="footprint-select-label"
-            className="-mb-1 cursor-pointer select-none text-[0.6rem] font-normal text-default">
-            <Trans>Empreinte</Trans>
-          </div>
-
-          <div className="flex items-center">{children}</div>
-        </div>
-      </components.SingleValue>
-    ),
-  }
-
   return (
     <div className="relative rounded-lg">
       <div className="relative block h-full">
@@ -114,12 +98,24 @@ export default function FootprintSelector({
           value={options.find((option) => option.value === footprintSelected)}
           onChange={(selected) => onChange((selected?.value as Metrics) || '')}
           styles={customStyles}
-          components={customComponents}
-          formatOptionLabel={({ label, icon }) => (
-            <div className="flex items-center">
-              {label} <Emoji>{icon}</Emoji>
-            </div>
-          )}
+          formatOptionLabel={({ label, icon }, { context }) =>
+            context === 'value' ? (
+              <div className="flex flex-col">
+                <div
+                  id="footprint-select-label"
+                  className="-mb-1 cursor-pointer select-none text-[0.6rem] font-normal text-default">
+                  <Trans>Empreinte</Trans>
+                </div>
+                <div className="flex items-center">
+                  {label} <Emoji>{icon}</Emoji>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center">
+                {label} <Emoji>{icon}</Emoji>
+              </div>
+            )
+          }
         />
       </div>
     </div>

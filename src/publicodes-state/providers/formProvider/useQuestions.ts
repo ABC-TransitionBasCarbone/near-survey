@@ -107,11 +107,12 @@ export default function useQuestions({
       .filter((question) => foldedSteps.indexOf(question) === -1)
       // and all that are not missing
       .filter((question) => {
-        return Object.keys(missingVariables).find((missingVariable) =>
-          missingVariable.includes(question) && !Number.isNaN(missingVariables[missingVariable])
+        return Object.keys(missingVariables).find(
+          (missingVariable) =>
+            missingVariable.includes(question) &&
+            !Number.isNaN(missingVariables[missingVariable])
         )
-      }
-      )
+      })
 
     // then we sort them by category, subcategory and missing variables
     return getSortedQuestionsList({

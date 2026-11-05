@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useParams } from 'next/navigation'
 
 export function useDeletePoll() {
-  const param = useParams<{ orgaSlug: string; pollSlug: string }>() 
+  const param = useParams<{ orgaSlug: string; pollSlug: string }>()
   const orgaSlug = param?.orgaSlug
   const pollSlug = param?.pollSlug
 

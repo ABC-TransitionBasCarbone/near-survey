@@ -15,7 +15,7 @@ export type PollToUpdate = {
 }
 
 export function useUpdatePoll() {
-  const param = useParams<{ orgaSlug: string; pollSlug: string }>() 
+  const param = useParams<{ orgaSlug: string; pollSlug: string }>()
   const orgaSlug = param?.orgaSlug
   const pollSlug = param?.pollSlug
 

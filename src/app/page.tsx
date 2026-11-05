@@ -1,20 +1,26 @@
+import DynamicCTAButtons from '@/components/cta/DynamicCTAButtons'
 import Trans from '@/components/translation/Trans'
+import { trackingActionClickCTA } from '@/constants/tracking/actions'
 import LandingPage from '@/design-system/layout/LandingPage'
 import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
+import {
+  getLandingClickCTARestart,
+  getLandingClickCTAResults,
+  getLandingClickCTAResume,
+  getLandingClickCTAStart,
+} from '@/helpers/tracking/landings'
+import { headers } from 'next/headers'
 import Partners from '../components/landing-pages/Partners'
 import CollectivelyCommit from './_components/CollectivelyCommit'
 import DecryptChallenges from './_components/DecryptChallenges'
 import DidYouKnowMainLanding from './_components/DidYouKnowMainLanding'
 import TwoFootprints from './_components/TwoFootprints'
-import DynamicCTAButtons from '@/components/cta/DynamicCTAButtons'
-import { getLandingClickCTARestart, getLandingClickCTAResults, getLandingClickCTAResume, getLandingClickCTAStart } from '@/helpers/tracking/landings'
-import { headers } from 'next/headers'
-import { trackingActionClickCTA } from '@/constants/tracking/actions'
 
 export async function generateMetadata() {
   return getMetadataObject({
-    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
-    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    title: 'Calculez votre empreinte carbone et eau en 10 minutes !',
+    description:
+      "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
     image: 'images/misc/near-logo.png',
     alternates: {
       canonical: '',
@@ -23,26 +29,22 @@ export async function generateMetadata() {
 }
 
 export default async function Homepage() {
-  const headersList = headers()
+  const headersList = await headers()
   const pathname = headersList.get('x-pathname') || '/'
 
   return (
     <>
       <LandingPage
-        heroIllustration={
-          <div className="flex flex-col">
-          </div>
-        }
+        heroIllustration={<div className="flex flex-col"></div>}
         heroTitle={<Trans>Explorer votre empreinte écologique ?</Trans>}
         heroDescription={
-          <div className="flex flex-col items-center gap-6 md:gap-10 text-center">
+          <div className="flex flex-col items-center gap-6 text-center md:gap-10">
             <p className="order-2 mb-0 text-lg md:order-1 md:text-2xl">
               <Trans>
                 10 minutes pour découvrir votre{' '}
                 <strong className="text-primary-700">empreinte carbone</strong>{' '}
                 et votre{' '}
-                <strong className="text-primary-700">empreinte eau</strong>
-                .
+                <strong className="text-primary-700">empreinte eau</strong>.
               </Trans>
             </p>
 
@@ -79,7 +81,6 @@ export default async function Homepage() {
         <DidYouKnowMainLanding />
 
         <DecryptChallenges />
-
       </LandingPage>
     </>
   )

@@ -1,5 +1,8 @@
 import type { Engine, Entries, ParsedRules } from '@/publicodes-state/types'
-import type { DottedName, NGCRuleNode } from '@abc-transitionbascarbone/near-modele'
+import type {
+  DottedName,
+  NGCRuleNode,
+} from '@abc-transitionbascarbone/near-modele'
 import { utils } from 'publicodes'
 import { useMemo } from 'react'
 import type { MissingVariables } from './../../types.d'

@@ -9,13 +9,14 @@ import { getMetadataObject } from '@/helpers/metadata/getMetadataObject'
 import { notFound } from 'next/navigation'
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata() {
   return getMetadataObject({
-    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
-    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    title: 'Calculez votre empreinte carbone et eau en 10 minutes !',
+    description:
+      "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
     image: 'images/misc/near-logo.png',
     alternates: {
       canonical: '',
@@ -23,8 +24,9 @@ export async function generateMetadata() {
   })
 }
 
+export default async function BlogPost({ params }: Props) {
+  const { slug } = await params
 
-export default async function BlogPost({ params: { slug } }: Props) {
   const post = await getPost('src/locales/blog/fr/', slug)
 
   const lastEditDate = await fetch(

@@ -3,6 +3,7 @@
 import Link from '@/components/Link'
 import { breadcrumbClickLink } from '@/constants/tracking/layout'
 import { trackEvent } from '@/utils/matomo/trackEvent'
+import type { JSX } from 'react'
 import { Fragment } from 'react'
 import { twMerge } from 'tailwind-merge'
 

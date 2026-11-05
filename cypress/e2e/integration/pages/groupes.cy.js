@@ -82,8 +82,7 @@ describe('The Group creation page /amis/creer', () => {
     cy.getAllLocalStorage().then((result) => {
       ownerUserId =
         result[Cypress.config('baseUrl')]?.['near::v1'] &&
-        JSON.parse(result[Cypress.config('baseUrl')]?.['near::v1'])
-          ?.user?.id
+        JSON.parse(result[Cypress.config('baseUrl')]?.['near::v1'])?.user?.id
     })
 
     cy.clearLocalStorage()
