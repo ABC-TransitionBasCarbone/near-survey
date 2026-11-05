@@ -8,10 +8,10 @@ const i18nConfig = {
     if (!acceptedLanguages) {
       return 'fr'
     }
-    const preferedLanguage = acceptedLanguages.find((acceptedLanguage) =>
-      ['fr', 'en', 'es'].includes(acceptedLanguage.slice(0, 2))
-    )
-    return preferedLanguage ?? 'fr'
+    const preferredLanguage = acceptedLanguages
+      .map((acceptedLanguage) => acceptedLanguage.slice(0, 2).toLowerCase())
+      .find((language) => ['fr', 'en', 'es'].includes(language))
+    return preferredLanguage ?? 'fr'
   },
 }
 

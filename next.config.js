@@ -1,5 +1,5 @@
 //@ts-check
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 const withMDX = require('@next/mdx')({
   extension: /\.mdx$/,
 })
@@ -20,69 +20,34 @@ const nextConfig = {
     // @ts-expect-error remotePatterns is not typed
     remotePatterns: remoteImagesPatterns,
   },
+  turbopack: {
+    rules: {
+      '*.yaml': {
+        loaders: ['yaml-loader'],
+        as: '*.js',
+      },
+    },
+  },
   async redirects() {
     return redirects
   },
-  webpack: (config, { dev, isServer }) => {
-    if (config.cache) {
-      if (dev) {
-        // Development configuration
-        config.cache = {
-          type: 'filesystem',
-        }
-      } else {
-        // Use cache in production
-        config.cache = Object.freeze({
-          type: 'memory',
-        })
-        config.cache.maxMemoryGenerations = 0
-      }
-    }
-
-    // Add a rule for YAML files
+  outputFileTracingExcludes: {
+    '*': ['.next/cache/webpack', '.git/**/*', 'cypress/**/*'],
+    '/blog': ['public/NGC_Kit.diffusion.zip'],
+    '/nouveautes': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
+    '/actions/plus': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
+    '/sitemap.xml': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
+  },
+  webpack: (config) => {
     config.module.rules.push({
       test: /\.ya?ml$/,
       use: 'yaml-loader',
     })
-
-    // Enable source maps
-    if (!dev && !isServer) {
-      config.devtool = 'source-map'
-    }
-
-    // if (process.env.SENTRY_AUTH_TOKEN) {
-    //   config.plugins.push(
-    //     sentryWebpackPlugin({
-    //       authToken: process.env.SENTRY_AUTH_TOKEN_SOURCEMAPS,
-    //       org: 'betagouv',
-    //       project: 'nosgestesclimat-nextjs',
-    //     })
-    //   )
-    // }
-
-    // We do not want to split the chunks too much
-    config.optimization.splitChunks.minSize = 300000
-
     return config
   },
   productionBrowserSourceMaps: true,
   experimental: {
-    outputFileTracingExcludes: {
-      '*': ['.next/cache/webpack', '.git/**/*', 'cypress/**/*'],
-      '/blog': ['public/NGC_Kit.diffusion.zip'],
-      '/nouveautes': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
-      '/actions/plus': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
-      '/sitemap.xml': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
-    },
     optimizePackageImports: ['@abc-transitionbascarbone/near-modele'],
-    webpackBuildWorker: true,
-    turbo: {
-      rules: {
-        '*.yaml': {
-          loaders: ['yaml-loader'],
-        },
-      },
-    },
   },
 }
 

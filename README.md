@@ -24,6 +24,9 @@ Pour lancer le site, utilisant le dernier modèle de calcul publié, il suffit d
 yarn && yarn dev
 ```
 
+`yarn dev` et `yarn build` utilisent Turbopack. Le script `yarn build:analyze`
+conserve Webpack pour la compatibilité avec `@next/bundle-analyzer`.
+
 ### Tests
 
 #### Tests end-to-end

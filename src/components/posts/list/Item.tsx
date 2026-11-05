@@ -1,8 +1,8 @@
 import Link from '@/components/Link'
 import Card from '@/design-system/layout/Card'
 import { getFormattedDate } from '@/helpers/date/getFormattedDate'
+import { getServerLocale } from '@/helpers/getServerLocale'
 import type { Post } from '@/types/posts'
-import { currentLocale } from 'next-i18n-router'
 import Image from 'next/image'
 
 type Props = {
@@ -10,8 +10,8 @@ type Props = {
   path: string
 }
 
-export default function Item({ item, path }: Props) {
-  const locale = currentLocale()
+export default async function Item({ item, path }: Props) {
+  const locale = await getServerLocale()
 
   return (
     <Card

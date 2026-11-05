@@ -1,6 +1,9 @@
 'use client'
 
-import type { DottedName, NGCRuleNode } from '@abc-transitionbascarbone/near-modele'
+import type {
+  DottedName,
+  NGCRuleNode,
+} from '@abc-transitionbascarbone/near-modele'
 import type { EvaluatedNode } from 'publicodes'
 import { useMemo } from 'react'
 import getType from '../../helpers/getType'

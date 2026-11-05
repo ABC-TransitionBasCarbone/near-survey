@@ -6,8 +6,9 @@ import ActionDetail from './_components/ActionDetail'
 
 export async function generateMetadata() {
   return getMetadataObject({
-    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
-    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    title: 'Calculez votre empreinte carbone et eau en 10 minutes !',
+    description:
+      "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
     image: 'images/misc/near-logo.png',
     alternates: {
       canonical: '',
@@ -15,11 +16,13 @@ export async function generateMetadata() {
   })
 }
 
-export default function ActionDetailPage({
+export default async function ActionDetailPage({
   params,
 }: {
-  params: { dottedName: DottedName[] }
+  params: Promise<{ dottedName: DottedName[] }>
 }) {
+  const resolvedParams = await params
+
   return (
     <div className="mx-auto max-w-[600px]">
       <ButtonLink
@@ -36,7 +39,7 @@ export default function ActionDetailPage({
         <Trans> Retour à la liste</Trans>
       </ButtonLink>
 
-      <ActionDetail params={params} />
+      <ActionDetail params={resolvedParams} />
     </div>
   )
 }

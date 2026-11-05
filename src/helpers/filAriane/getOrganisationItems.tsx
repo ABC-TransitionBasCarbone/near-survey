@@ -1,6 +1,7 @@
 import Trans from '@/components/translation/Trans'
 import type { User } from '@/publicodes-state/types'
 import type { PublicOrganisationPoll } from '@/types/organisations'
+import type { JSX } from 'react'
 
 function formatSlugToName(slug: string) {
   return decodeURIComponent(slug).replaceAll('-', ' ')

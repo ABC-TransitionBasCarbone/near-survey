@@ -59,7 +59,7 @@ export function useSetCurrentSimulationFromParams() {
     setIsCorrectSimulationSet(true)
 
     // We delete the query params and reload the page
-    if(pathname){
+    if (pathname) {
       router.replace(pathname)
     }
   }, [

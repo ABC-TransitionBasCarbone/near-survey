@@ -1,7 +1,7 @@
 'use client'
 
 import type { DottedName } from '@abc-transitionbascarbone/near-modele'
-import type { PropsWithChildren} from 'react';
+import type { PropsWithChildren } from 'react'
 import { useContext, useMemo } from 'react'
 import { SimulationContext } from '../simulationProvider/context'
 import Provider from './Provider'
@@ -26,7 +26,7 @@ export default function FailSafeFormProvider({
   }, [safeEvaluate, root, rules])
 
   if (!isRootSafe) {
-    window.location = '/404' as unknown as Location
+    window.location.pathname = '/404'
     return
   }
   return <Provider root={root}>{children}</Provider>

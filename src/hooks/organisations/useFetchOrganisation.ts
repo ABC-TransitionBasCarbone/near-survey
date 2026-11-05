@@ -5,8 +5,8 @@ import axios from 'axios'
 import { useParams } from 'next/navigation'
 
 export default function useFetchOrganisation() {
-  const param = useParams<{orgaSlug: string}>()
-  const orgaSlug = param?.orgaSlug 
+  const param = useParams<{ orgaSlug: string }>()
+  const orgaSlug = param?.orgaSlug
 
   return useQuery({
     queryKey: ['organisations', orgaSlug],

@@ -1,4 +1,7 @@
-import type { DottedName, NGCRuleNode } from '@abc-transitionbascarbone/near-modele'
+import type {
+  DottedName,
+  NGCRuleNode,
+} from '@abc-transitionbascarbone/near-modele'
 import type { EvaluatedNode } from 'publicodes'
 
 type Props = {

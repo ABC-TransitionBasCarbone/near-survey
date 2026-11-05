@@ -8,8 +8,9 @@ import type { DottedName } from '@abc-transitionbascarbone/near-modele'
 
 export async function generateMetadata() {
   return getMetadataObject({
-    title: "Calculez votre empreinte carbone et eau en 10 minutes !",
-    description: "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
+    title: 'Calculez votre empreinte carbone et eau en 10 minutes !',
+    description:
+      "C'est facile, ludique et on vous proposera même des moyens personnalisés pour agir. Qu'attendez-vous pour faire le test ? ",
     image: 'images/misc/near-logo.png',
     alternates: {
       canonical: '',
@@ -17,16 +18,15 @@ export async function generateMetadata() {
   })
 }
 
-
 type Props = {
-  params: {
+  params: Promise<{
     dottedName: DottedName[]
-  }
+  }>
 }
 
-export default async function ActionPlus({
-  params: { dottedName: dottedNameArray },
-}: Props) {
+export default async function ActionPlus({ params }: Props) {
+  const { dottedName: dottedNameArray } = await params
+
   const action = await getPost(
     `src/locales/actions-plus/fr/`,
     decodeURI(dottedNameArray.join(' . ').replaceAll('-', ' '))
