@@ -24,6 +24,7 @@ const nextConfig = {
     rules: {
       '*.yaml': {
         loaders: ['yaml-loader'],
+        as: '*.js',
       },
     },
   },
@@ -37,52 +38,16 @@ const nextConfig = {
     '/actions/plus': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
     '/sitemap.xml': ['public/images/blog', 'public/NGC_Kit.diffusion.zip'],
   },
-  webpack: (config, { dev, isServer }) => {
-    if (config.cache) {
-      if (dev) {
-        // Development configuration
-        config.cache = {
-          type: 'filesystem',
-        }
-      } else {
-        // Use cache in production
-        config.cache = Object.freeze({
-          type: 'memory',
-        })
-        config.cache.maxMemoryGenerations = 0
-      }
-    }
-
-    // Add a rule for YAML files
+  webpack: (config) => {
     config.module.rules.push({
       test: /\.ya?ml$/,
       use: 'yaml-loader',
     })
-
-    // Enable source maps
-    if (!dev && !isServer) {
-      config.devtool = 'source-map'
-    }
-
-    // if (process.env.SENTRY_AUTH_TOKEN) {
-    //   config.plugins.push(
-    //     sentryWebpackPlugin({
-    //       authToken: process.env.SENTRY_AUTH_TOKEN_SOURCEMAPS,
-    //       org: 'betagouv',
-    //       project: 'nosgestesclimat-nextjs',
-    //     })
-    //   )
-    // }
-
-    // We do not want to split the chunks too much
-    config.optimization.splitChunks.minSize = 300000
-
     return config
   },
   productionBrowserSourceMaps: true,
   experimental: {
     optimizePackageImports: ['@abc-transitionbascarbone/near-modele'],
-    webpackBuildWorker: true,
   },
 }
 

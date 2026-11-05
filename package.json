@@ -11,11 +11,11 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "next dev --webpack",
+    "dev": "next dev",
     "dev:turbo": "next dev --turbo",
-    "build": "next build --webpack",
+    "build": "next build --turbopack",
     "build:analyze": "ANALYZE=true next build --webpack",
-    "build:debug-memory": "next build --webpack --experimental-debug-memory-usage",
+    "build:debug-memory": "next build --turbopack --experimental-debug-memory-usage",
     "format": "prettier --write \"**/*.{js,ts,md,json}\" && eslint . --fix",
     "start": "next start",
     "lint": "prettier --check \"**/*.{js,ts,md,json}\" && eslint .",
