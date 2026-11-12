@@ -4,7 +4,7 @@ const withMDX = require('@next/mdx')({
   extension: /\.mdx$/,
 })
 
-const { withSentryConfig } = require('@sentry/nextjs')
+const { withSentryConfig } = require('@sentry/nextjs/config')
 
 const redirects = require('./config/redirects.js')
 
